@@ -1,0 +1,11 @@
+.nav {
+  &-list {
+    gap: 96px;
+  }
+
+  &-link {
+    font-weight: map-get($font-weights, 'bold');
+    font-size: map-get($font-sizes, 'lg');
+    color: map-get($colors, 'primary');
+  }
+}

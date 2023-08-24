@@ -1,0 +1,21 @@
+.section {
+  position: relative;
+  width: 100%;
+
+  &-title {
+    font-size: map-get($font-sizes, '3xl');
+    font-weight: map-get($font-weights, 'light');
+
+    &-center {
+      text-align: center;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .section {
+    &-title {
+      font-size: 18px;
+    }
+  }
+}
