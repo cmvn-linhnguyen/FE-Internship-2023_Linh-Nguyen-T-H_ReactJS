@@ -14,17 +14,17 @@ export const advertisements: AdvertisementItemProps[] = [
   {
     image: require('../../assets/images/advertisements1.png'),
     title: 'New arrivals are now in!',
-    buttonTitle: 'SHOW COLLECTION',
+    buttonLabel: 'SHOW COLLECTION',
   },
   {
     image: require('../../assets/images/advertisements2.png'),
     title: 'Basic t-shirts',
-    buttonTitle: 'MORE DETAILS',
+    buttonLabel: 'MORE DETAILS',
   },
   {
     image: require('../../assets/images/advertisements3.png'),
     title: 'Sale this summer',
-    buttonTitle: 'MORE DETAILS',
+    buttonLabel: 'MORE DETAILS',
     discount: 50,
   },
 ];

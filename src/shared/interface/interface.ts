@@ -4,7 +4,7 @@ import { CartService } from '../services/CartService';
 export interface AdvertisementItemProps {
   image: string;
   title: string;
-  buttonTitle: string;
+  buttonLabel: string;
   discount?: number;
 }
 

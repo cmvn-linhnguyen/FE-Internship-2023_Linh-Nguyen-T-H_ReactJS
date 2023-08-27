@@ -10,7 +10,7 @@ const AdvertisementItem = (props: AdvertisementItemProps) => {
       />
       <h4 className="advertisement-title">{props.title}</h4>
       <a className="btn advertisement-link" href="/#">
-        {props.buttonTitle}
+        {props.buttonLabel}
       </a>
       {props.discount && (
         <span className="badge badge-danger advertisement-discount">
