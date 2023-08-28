@@ -36,7 +36,7 @@ const Cart = ({
             </div>
             <div className="col col-3">
               <CartSummary
-                totalItems={cartService.getQuantity(cartData)}
+                totalItems={cartData.length}
                 totalPrice={cartService.calcTotalPrice(cartData)}
               />
             </div>
