@@ -1,0 +1,63 @@
+.header {
+  padding: 24px 0px;
+  width: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+
+  background-color: transparent;
+
+  &.header-cart {
+    position: fixed;
+    padding: 16px 0px;
+    background-color: map-get($colors, primary);
+
+    .nav-link {
+      color: map-get($colors, 'white');
+    }
+  }
+}
+
+.nav {
+  &-list {
+    gap: 96px;
+  }
+
+  &-link {
+    font-weight: map-get($font-weights, 'bold');
+    font-size: map-get($font-sizes, 'lg');
+    color: map-get($colors, 'primary');
+  }
+}
+
+.header-action {
+  .action {
+    &-list {
+      gap: 24px;
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      .cart-item-count {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: map-get($colors, 'red');
+        border-radius: 50%;
+        width: 21px;
+        height: 21px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 13px;
+        font-weight: bold;
+        color: #fff;
+      }
+    }
+  }
+}
