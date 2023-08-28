@@ -1,4 +1,4 @@
-import { AdvertisementItemProps } from '../../../../shared/interface/interface';
+import { AdvertisementItemProps } from '../../../../../shared/models/interface';
 
 const AdvertisementItem = (props: AdvertisementItemProps) => {
   return (

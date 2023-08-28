@@ -1,6 +1,7 @@
-import { bannerItems } from '../../../../shared/data/data';
-import { BannerItemProps } from '../../../../shared/interface/interface';
 import BannerItem from './BannerItem';
+
+import { bannerItems } from '../../../../../shared/data/data';
+import { BannerItemProps } from '../../../../../shared/models/interface';
 
 const Banner = () => {
   return (
@@ -16,7 +17,9 @@ const Banner = () => {
               <div className="banner-icon-wrap d-flex jc-center ai-center">
                 <img
                   className="icon banner-icon"
-                  src={require('../../../../assets/icons/ic-arrow.svg').default}
+                  src={
+                    require('../../../../../assets/icons/ic-arrow.svg').default
+                  }
                   alt="Arrow Icon"
                 />
               </div>

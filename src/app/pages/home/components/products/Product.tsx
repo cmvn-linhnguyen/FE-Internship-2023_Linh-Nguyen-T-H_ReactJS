@@ -1,13 +1,13 @@
-import { STATUS } from '../../../../shared/constants';
+import { LOCAL_STORAGE_KEY, STATUS } from '../../../../../shared/constants';
 import {
   CartProps,
   ProductComponentProps,
   ProductProps,
-} from '../../../../shared/interface/interface';
+} from '../../../../../shared/models/interface';
 import {
   calcProductPrice,
   getDataFromLocalStorage,
-} from '../../../../shared/utils';
+} from '../../../../../shared/utils';
 
 type Type = {
   data: ProductProps;
@@ -26,8 +26,8 @@ const Product = (props: CombinedProps) => {
       quantity: 1,
     };
 
-    const updatedCart = props.cartService.addToCart(
-      getDataFromLocalStorage('cart'),
+    const updatedCart = props.cartService?.addToCart(
+      getDataFromLocalStorage(LOCAL_STORAGE_KEY.Cart),
       cartItem
     );
     props.updateCartData(updatedCart);

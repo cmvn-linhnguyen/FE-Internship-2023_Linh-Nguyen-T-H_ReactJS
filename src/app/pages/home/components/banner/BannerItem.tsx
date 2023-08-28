@@ -1,4 +1,4 @@
-import { BannerItemProps } from '../../../../shared/interface/interface';
+import { BannerItemProps } from '../../../../../shared/models/interface';
 
 const BannerItem = (props: BannerItemProps) => {
   return (

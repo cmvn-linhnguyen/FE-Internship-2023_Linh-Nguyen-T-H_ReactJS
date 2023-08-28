@@ -1,6 +1,7 @@
-import { benefits } from '../../../../shared/data/data';
-import { BenefitsItemProps } from '../../../../shared/interface/interface';
 import BenefitsItem from './BenefitsItem';
+
+import { benefits } from '../../../../../shared/data/data';
+import { BenefitsItemProps } from '../../../../../shared/models/interface';
 
 const Benefits = () => {
   return (

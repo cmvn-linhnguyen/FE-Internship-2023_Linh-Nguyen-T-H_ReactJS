@@ -1,14 +1,10 @@
-// import advertisements1 from require('../../assets/images/advertisements1.png';
-// import advertisements2 from require('../../assets/images/advertisements2.png';
-// import advertisements3 from require('../../assets/images/advertisements3.png';
-
 import { STATUS } from '../constants';
 import {
   AdvertisementItemProps,
   BannerItemProps,
   BenefitsItemProps,
   ProductProps,
-} from '../interface/interface';
+} from '../models/interface';
 
 export const advertisements: AdvertisementItemProps[] = [
   {

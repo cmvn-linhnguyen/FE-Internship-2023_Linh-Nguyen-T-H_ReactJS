@@ -1,5 +1,5 @@
-import { CART_ACTION } from '../constants';
-import { CartProps } from '../interface/interface';
+import { CART_ACTION, LOCAL_STORAGE_KEY } from '../constants';
+import { CartProps } from '../models/interface';
 import { calcCartPrice, saveDataToLocalStorage } from '../utils';
 
 export class CartService {
@@ -10,7 +10,7 @@ export class CartService {
     } else {
       carts.push(cart);
     }
-    saveDataToLocalStorage('cart', carts);
+    saveDataToLocalStorage(LOCAL_STORAGE_KEY.Cart, carts);
     return carts;
   };
 

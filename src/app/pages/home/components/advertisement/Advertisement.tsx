@@ -1,6 +1,7 @@
-import { advertisements } from '../../../../shared/data/data';
-import { AdvertisementItemProps } from '../../../../shared/interface/interface';
 import AdvertisementItem from './AdvertisementItem';
+
+import { advertisements } from '../../../../../shared/data/data';
+import { AdvertisementItemProps } from '../../../../../shared/models/interface';
 
 const Advertisement = () => {
   return (

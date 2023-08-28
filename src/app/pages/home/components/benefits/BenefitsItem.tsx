@@ -1,4 +1,4 @@
-import { BenefitsItemProps } from '../../../../shared/interface/interface';
+import { BenefitsItemProps } from '../../../../../shared/models/interface';
 
 const BenefitsItem = (props: BenefitsItemProps) => {
   return (

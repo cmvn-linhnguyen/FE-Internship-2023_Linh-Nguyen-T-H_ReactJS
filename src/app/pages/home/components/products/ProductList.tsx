@@ -1,9 +1,10 @@
-import { products } from '../../../../shared/data/data';
+import Product from './Product';
+
+import { products } from '../../../../../shared/data/data';
 import {
   ProductComponentProps,
   ProductProps,
-} from '../../../../shared/interface/interface';
-import Product from './Product';
+} from '../../../../../shared/models/interface';
 
 const ProductList = (props: ProductComponentProps) => {
   return (

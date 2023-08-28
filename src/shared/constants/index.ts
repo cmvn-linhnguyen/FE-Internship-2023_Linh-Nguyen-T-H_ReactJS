@@ -7,3 +7,7 @@ export enum CART_ACTION {
   Increase = 'increase',
   Decrease = 'decrease',
 }
+
+export enum LOCAL_STORAGE_KEY {
+  Cart = 'cart',
+}

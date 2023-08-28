@@ -1,6 +1,8 @@
 import React from 'react';
-import { ProductComponentProps } from '../../../shared/interface/interface';
+
 import ProductList from './products/ProductList';
+
+import { ProductComponentProps } from '../../../../shared/models/interface';
 
 const ProductToday = (props: ProductComponentProps) => {
   return (

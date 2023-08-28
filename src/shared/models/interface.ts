@@ -1,5 +1,5 @@
 import { STATUS } from '../constants';
-import { CartService } from '../services/CartService';
+import { CartService } from '../services/cart-service';
 
 export interface AdvertisementItemProps {
   image: string;
@@ -27,11 +27,17 @@ export interface ProductProps {
   image: string;
   price: number;
   discount: number;
-  status: STATUS.Available | STATUS.Out_of_stock;
+  status: STATUS;
 }
 
 export interface CartProps extends Omit<ProductProps, 'status'> {
   quantity: number;
+}
+
+export interface CartComponentProps {
+  cartData: CartProps[];
+  cartService: CartService;
+  updateCartData: (newCartData: CartProps[]) => void;
 }
 
 export interface ProductComponentProps {
@@ -39,8 +45,7 @@ export interface ProductComponentProps {
   updateCartData: (newCartData: CartProps[]) => void;
 }
 
-export interface CartComponentProps {
-  cartData: CartProps[];
-  cartService: CartService;
-  updateCartData: (newCartData: CartProps[]) => void;
+export interface CartSummaryProps {
+  totalItems: number;
+  totalPrice: number;
 }
