@@ -5,24 +5,17 @@ import {
 } from '../../../../shared/models/interface';
 import { calcCartPrice, calcProductPrice } from '../../../../shared/utils';
 
-type CartItemProps = { cart: CartProps };
-
-type CombinedProps = CartItemProps & CartComponentProps;
-
 const CartItem = ({
   cart,
   cartData,
   cartService,
   updateCartData,
-}: CombinedProps) => {
+}: { cart: CartProps } & CartComponentProps) => {
   const handleDelete = (id: number): void => {
     updateCartData(cartService.deleteCart(cartData, id));
   };
 
-  const updateQuantity = (
-    id: number,
-    action: CART_ACTION.Decrease | CART_ACTION.Increase
-  ): void => {
+  const updateQuantity = (id: number, action: CART_ACTION): void => {
     updateCartData(cartService.updateCart(cartData, id, action));
   };
 

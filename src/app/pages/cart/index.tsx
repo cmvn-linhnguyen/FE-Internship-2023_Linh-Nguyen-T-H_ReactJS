@@ -14,6 +14,10 @@ const Cart = ({
   updateCartData,
 }: CartComponentProps) => {
   useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+
+  useEffect(() => {
     saveDataToLocalStorage(LOCAL_STORAGE_KEY.Cart, cartData);
   }, [cartData]);
 

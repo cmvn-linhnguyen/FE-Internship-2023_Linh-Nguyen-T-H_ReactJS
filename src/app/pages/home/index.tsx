@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Footer from '../../../shared/components/Footer';
 import Newsletter from '../../../shared/components/Newsletter';
@@ -11,6 +11,10 @@ import Benefits from './components/benefits/Benefits';
 import { ProductComponentProps } from '../../../shared/models/interface';
 
 const Home = React.memo((props: ProductComponentProps) => {
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+
   return (
     <>
       <Banner />
