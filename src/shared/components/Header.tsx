@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 interface HeaderProps {
@@ -7,10 +8,28 @@ interface HeaderProps {
 const Header = ({ cartItemCount }: HeaderProps) => {
   const location = useLocation();
 
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <header
       className={`header ${
-        location.pathname === '/cart' ? 'header-cart' : null
+        location.pathname === '/cart' || scrolled ? 'header-cart' : null
       }`}
     >
       <div className="container">
