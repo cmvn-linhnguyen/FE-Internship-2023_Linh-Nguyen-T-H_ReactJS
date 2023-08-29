@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
 
-import Footer from '../../../shared/components/Footer';
-import Newsletter from '../../../shared/components/Newsletter';
-import ProductToday from './components/ProductToday';
-import Recommendation from './components/Recommendation';
-import Advertisement from './components/advertisement/Advertisement';
-import Banner from './components/banner/Banner';
-import Benefits from './components/benefits/Benefits';
+import { Footer, Newsletter } from '../../../shared/components';
 
 import { ProductComponentProps } from '../../../shared/models/interface';
+import { Advertisement, Banner } from './components';
+import { Recommendation } from './components/Recommendation';
+import { Benefits } from './components/benefits/Benefits';
+import { ProductToday } from './components/ProductToday';
 
-const Home = React.memo((props: ProductComponentProps) => {
+const Home = React.memo(({ updateCart }: ProductComponentProps) => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -19,15 +17,9 @@ const Home = React.memo((props: ProductComponentProps) => {
     <>
       <Banner />
       <Advertisement />
-      <Recommendation
-        cartService={props.cartService}
-        updateCartData={props.updateCartData}
-      />
+      <Recommendation updateCart={updateCart} />
       <Benefits />
-      <ProductToday
-        cartService={props.cartService}
-        updateCartData={props.updateCartData}
-      />
+      <ProductToday updateCart={updateCart} />
       <Newsletter />
       <Footer />
     </>

@@ -1,6 +1,6 @@
 import { CartSummaryProps } from '../../../../shared/models/interface';
 
-const CartSummary = ({ totalItems, totalPrice }: CartSummaryProps) => {
+export const CartSummary = ({ totalItems, totalPrice }: CartSummaryProps) => {
   return (
     <div className="cart-summary">
       <div className="summary-header">
@@ -14,5 +14,3 @@ const CartSummary = ({ totalItems, totalPrice }: CartSummaryProps) => {
     </div>
   );
 };
-
-export default CartSummary;

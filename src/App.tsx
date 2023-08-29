@@ -1,47 +1,41 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './stylesheet/style.scss';
 
+import { Header } from './shared/components';
 import Cart from './app/pages/cart';
 import Home from './app/pages/home';
-import Header from './shared/components/Header';
 
-import { CartProps } from './shared/models/interface';
-import { getDataFromLocalStorage } from './shared/utils';
+import { CartItemProps } from './shared/models/interface';
+import {
+  getDataFromLocalStorage,
+  saveDataToLocalStorage,
+} from './shared/utils';
 import { CartService } from './shared/services/cart-service';
-import { StorageKey } from './shared/constants';
+import { StorageKeys } from './shared/constants';
 
 const App = () => {
-  const [cartData, setCartData] = useState<CartProps[]>(
-    getDataFromLocalStorage(StorageKey.CART)
+  const [cart, setCart] = useState<CartItemProps[]>(
+    getDataFromLocalStorage(StorageKeys.CART)
   );
 
-  const cartService = useMemo(() => new CartService(), []);
-
-  const updateCartData = useCallback((newCartData: CartProps[]) => {
-    setCartData([...newCartData]);
+  const updateCart = useCallback((newCart: CartItemProps[]) => {
+    setCart(newCart);
   }, []);
+
+  useEffect(() => {
+    saveDataToLocalStorage(StorageKeys.CART, cart);
+  }, [cart]);
 
   return (
     <Router>
-      <Header cartItemCount={cartService.getQuantity(cartData)} />
+      <Header cartQuantity={new CartService().getQuantity(cart)} />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Home cartService={cartService} updateCartData={updateCartData} />
-          }
-        />
+        <Route path="/" element={<Home updateCart={updateCart} />} />
         <Route
           path="/cart"
-          element={
-            <Cart
-              cartData={cartData}
-              cartService={cartService}
-              updateCartData={updateCartData}
-            />
-          }
+          element={<Cart cart={cart} updateCart={updateCart} />}
         />
       </Routes>
     </Router>

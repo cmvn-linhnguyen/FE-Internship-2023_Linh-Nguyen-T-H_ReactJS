@@ -1,9 +1,9 @@
-import BenefitsItem from './BenefitsItem';
+import { BenefitsItem } from './BenefitsItem';
 
 import { benefits } from '../../../../../shared/data/data';
 import { BenefitsItemProps } from '../../../../../shared/models/interface';
 
-const Benefits = () => {
+export const Benefits = () => {
   return (
     <section className="section section-service">
       <div className="container">
@@ -21,5 +21,3 @@ const Benefits = () => {
     </section>
   );
 };
-
-export default Benefits;

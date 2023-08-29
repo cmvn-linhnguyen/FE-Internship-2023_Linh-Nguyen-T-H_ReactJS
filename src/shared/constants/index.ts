@@ -3,11 +3,6 @@ export enum Status {
   OUT_OF_STOCK = 'out_of_stock',
 }
 
-export enum CartAction {
-  INCREASE = 'increase',
-  DECREASE = 'decrease',
-}
-
-export enum StorageKey {
+export enum StorageKeys {
   CART = 'cart',
 }

@@ -1,46 +1,44 @@
-import { CartAction, StorageKey } from '../constants';
-import { CartProps } from '../models/interface';
-import { calcCartPrice, saveDataToLocalStorage } from '../utils';
+import { CartItemProps } from '../models/interface';
+import { calcCartPrice } from '../utils';
 
 export class CartService {
-  addToCart = (carts: CartProps[], cart: CartProps): CartProps[] => {
-    const cartItem = carts.find((item: CartProps) => item.id === cart.id);
+  addToCart = (
+    carts: CartItemProps[],
+    cart: CartItemProps
+  ): CartItemProps[] => {
+    const cartItem = carts.find((item: CartItemProps) => item.id === cart.id);
     if (cartItem) {
       cartItem.quantity += 1;
     } else {
       carts.push(cart);
     }
-    saveDataToLocalStorage(StorageKey.CART, carts);
     return carts;
   };
 
-  deleteCart = (carts: CartProps[], id: number): CartProps[] => {
+  deleteCart = (carts: CartItemProps[], id: number): CartItemProps[] => {
     return carts.filter((item) => item.id !== id);
   };
 
   updateCart = (
-    carts: CartProps[],
+    carts: CartItemProps[],
     id: number,
-    action: CartAction
-  ): CartProps[] => {
+    quantity: number
+  ): CartItemProps[] => {
     return carts.map((cartItem) => {
       if (cartItem.id === id) {
-        if (action === CartAction.INCREASE)
-          return { ...cartItem, quantity: cartItem.quantity + 1 };
-        if (action === CartAction.DECREASE && cartItem.quantity > 1)
-          return { ...cartItem, quantity: cartItem.quantity - 1 };
+        return { ...cartItem, quantity: quantity };
       }
       return cartItem;
     });
   };
 
-  calcTotalPrice = (carts: CartProps[]): number => {
+  calcTotalPrice = (carts: CartItemProps[]): number => {
     return carts.reduce((total, cartItem) => {
       return total + calcCartPrice(cartItem);
     }, 0);
   };
 
-  getQuantity = (carts: CartProps[]): number => {
+  getQuantity = (carts: CartItemProps[]): number => {
     return carts.reduce(
       (totalQuantity, cartItem) => totalQuantity + cartItem.quantity,
       0

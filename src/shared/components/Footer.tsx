@@ -1,4 +1,4 @@
-const Footer = () => {
+export const Footer = () => {
   return (
     <footer className="footer">
       <section className="section section-shopinfor">
@@ -155,5 +155,3 @@ const Footer = () => {
     </footer>
   );
 };
-
-export default Footer;

@@ -1,6 +1,6 @@
 import { BannerItemProps } from '../../../../../shared/models/interface';
 
-const BannerItem = (props: BannerItemProps) => {
+export const BannerItem = (props: BannerItemProps) => {
   return (
     <li className="service-item d-flex ai-center">
       <div className="service-icon-wrap d-flex ai-center jc-center">
@@ -17,5 +17,3 @@ const BannerItem = (props: BannerItemProps) => {
     </li>
   );
 };
-
-export default BannerItem;

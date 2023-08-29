@@ -1,70 +1,78 @@
-import { CartAction } from '../../../../shared/constants';
 import {
   CartComponentProps,
-  CartProps,
+  CartItemProps,
 } from '../../../../shared/models/interface';
+import { CartService } from '../../../../shared/services/cart-service';
 import { calcCartPrice, calcProductPrice } from '../../../../shared/utils';
 
-const CartItem = ({
+export const CartItem = ({
+  cartItem,
   cart,
-  cartData,
-  cartService,
-  updateCartData,
-}: { cart: CartProps } & CartComponentProps) => {
+  updateCart,
+}: { cartItem: CartItemProps } & CartComponentProps) => {
+  const cartService = new CartService();
+
   const handleDelete = (id: number): void => {
-    updateCartData(cartService.deleteCart(cartData, id));
+    updateCart(cartService.deleteCart(cart, id));
   };
 
-  const updateQuantity = (id: number, action: CartAction): void => {
-    updateCartData(cartService.updateCart(cartData, id, action));
+  const updateQuantity = (id: number, quantity: number): void => {
+    updateCart(cartService.updateCart(cart, id, quantity));
   };
 
   return (
     <tr className="table-row">
       <td className="col col-3">
-        <img className="cart-item-img" src={cart.image} alt={cart.name} />
+        <img
+          className="cart-item-img"
+          src={cartItem.image}
+          alt={cartItem.name}
+        />
       </td>
-      <td className="col col-3">{cart.name}</td>
+      <td className="col col-3">{cartItem.name}</td>
       <td className="col col-2">
         <div className="price-wrap">
-          {cart.discount ? (
+          {cartItem.discount ? (
             <div className="discount">
               <p className="discountedPrice">
-                ${calcProductPrice(cart).toFixed(2)}
+                ${calcProductPrice(cartItem).toFixed(2)}
               </p>
-              <p className="originalPrice">${cart.price}</p>
+              <p className="originalPrice">${cartItem.price}</p>
             </div>
           ) : (
-            <p>${cart.price.toFixed(2)}</p>
+            <p>${cartItem.price.toFixed(2)}</p>
           )}
-          <p className="item-price">Total: ${calcCartPrice(cart).toFixed(2)}</p>
+          <p className="item-price">
+            Total: ${calcCartPrice(cartItem).toFixed(2)}
+          </p>
         </div>
       </td>
       <td className="col col-2">
         <div className="quantity-wrap d-flex ai-center">
           <button
-            className={`quantity-update decrease pro-${cart.id}`}
-            disabled={cart.quantity === 1}
-            onClick={() => updateQuantity(cart.id, CartAction.DECREASE)}
+            className={`quantity-update decrease pro-${cartItem.id}`}
+            disabled={cartItem.quantity === 1}
+            onClick={() => updateQuantity(cartItem.id, cartItem.quantity - 1)}
           >
             -
           </button>
-          <p className="item-quantity">{cart.quantity}</p>
+          <p className="item-quantity">{cartItem.quantity}</p>
           <button
-            className={`quantity-update increase pro-${cart.id}`}
-            onClick={() => updateQuantity(cart.id, CartAction.INCREASE)}
+            className={`quantity-update increase pro-${cartItem.id}`}
+            onClick={() => updateQuantity(cartItem.id, cartItem.quantity + 1)}
           >
             +
           </button>
         </div>
       </td>
       <td className="col col-2">
-        <button className="delete-button" onClick={() => handleDelete(cart.id)}>
+        <button
+          className="delete-button"
+          onClick={() => handleDelete(cartItem.id)}
+        >
           Delete
         </button>
       </td>
     </tr>
   );
 };
-
-export default CartItem;

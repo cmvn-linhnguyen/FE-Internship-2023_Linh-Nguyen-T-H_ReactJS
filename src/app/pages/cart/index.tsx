@@ -1,25 +1,16 @@
 import React, { useEffect } from 'react';
 
-import CartEmpty from './components/CartEmpty';
-import CartTable from './components/CartTable';
-import CartSummary from './components/CartSummary';
+import { CartEmpty, CartSummary, CartTable } from './components';
 
 import { CartComponentProps } from '../../../shared/models/interface';
-import { saveDataToLocalStorage } from '../../../shared/utils';
-import { StorageKey } from '../../../shared/constants';
+import { CartService } from '../../../shared/services/cart-service';
 
-const Cart = ({
-  cartData,
-  cartService,
-  updateCartData,
-}: CartComponentProps) => {
+const Cart = ({ cart, updateCart }: CartComponentProps) => {
+  const cartService = new CartService();
+
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
-
-  useEffect(() => {
-    saveDataToLocalStorage(StorageKey.CART, cartData);
-  }, [cartData]);
 
   return (
     <main>
@@ -27,23 +18,23 @@ const Cart = ({
         <h3 className="cart-header">Shopping Cart</h3>
         <div className="container">
           <div className="row section-cart-content">
-            <div className="col col-9">
-              {cartData.length > 0 ? (
-                <CartTable
-                  cartData={cartData}
-                  cartService={cartService}
-                  updateCartData={updateCartData}
-                />
-              ) : (
+            {cart.length > 0 ? (
+              <>
+                <div className="col col-9">
+                  <CartTable cart={cart} updateCart={updateCart} />
+                </div>
+                <div className="col col-3">
+                  <CartSummary
+                    totalItems={cart.length}
+                    totalPrice={cartService.calcTotalPrice(cart)}
+                  />
+                </div>
+              </>
+            ) : (
+              <div className="col col-12">
                 <CartEmpty />
-              )}
-            </div>
-            <div className="col col-3">
-              <CartSummary
-                totalItems={cartData.length}
-                totalPrice={cartService.calcTotalPrice(cartData)}
-              />
-            </div>
+              </div>
+            )}
           </div>
         </div>
       </section>

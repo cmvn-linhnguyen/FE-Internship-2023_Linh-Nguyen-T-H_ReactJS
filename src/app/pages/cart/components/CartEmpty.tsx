@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import emptyImage from '../../../../assets/images/empty.png';
 
-const CartEmpty = () => {
+export const CartEmpty = () => {
   return (
     <div className="empty-wrap d-flex fd-column ai-center jc-center">
       <img className="empty-image" src={emptyImage} alt="Empty Cart" />
@@ -12,5 +12,3 @@ const CartEmpty = () => {
     </div>
   );
 };
-
-export default CartEmpty;

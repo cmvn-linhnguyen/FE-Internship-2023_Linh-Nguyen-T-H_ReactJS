@@ -1,9 +1,9 @@
-import BannerItem from './BannerItem';
+import { BannerItem } from './BannerItem';
 
 import { bannerItems } from '../../../../../shared/data/data';
 import { BannerItemProps } from '../../../../../shared/models/interface';
 
-const Banner = () => {
+export const Banner = () => {
   return (
     <section className="section-banner">
       <div className="container">
@@ -40,5 +40,3 @@ const Banner = () => {
     </section>
   );
 };
-
-export default Banner;

@@ -1,4 +1,4 @@
-import Product from './Product';
+import { Product } from './Product';
 
 import { products } from '../../../../../shared/data/data';
 import {
@@ -6,20 +6,14 @@ import {
   ProductProps,
 } from '../../../../../shared/models/interface';
 
-const ProductList = (props: ProductComponentProps) => {
+export const ProductList = ({ updateCart }: ProductComponentProps) => {
   return (
     <ul className="product-list row">
       {products.map((product: ProductProps) => (
         <li key={product.id} className="col col-3">
-          <Product
-            data={product}
-            cartService={props.cartService}
-            updateCartData={props.updateCartData}
-          />
+          <Product product={product} updateCart={updateCart} />
         </li>
       ))}
     </ul>
   );
 };
-
-export default ProductList;

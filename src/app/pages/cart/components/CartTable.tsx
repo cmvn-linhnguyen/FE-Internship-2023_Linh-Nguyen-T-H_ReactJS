@@ -1,15 +1,7 @@
-import CartItem from './CartItem';
+import { CartComponentProps } from '../../../../shared/models/interface';
+import { CartItem } from '../components';
 
-import {
-  CartComponentProps,
-  CartProps,
-} from '../../../../shared/models/interface';
-
-const CartTable = ({
-  cartData,
-  cartService,
-  updateCartData,
-}: CartComponentProps) => {
+export const CartTable = ({ cart, updateCart }: CartComponentProps) => {
   return (
     <table className="cart-table">
       <thead>
@@ -22,18 +14,15 @@ const CartTable = ({
         </tr>
       </thead>
       <tbody>
-        {cartData.map((item: CartProps) => (
+        {cart.map((cartItem) => (
           <CartItem
-            key={item.id}
-            cart={item}
-            cartData={cartData}
-            cartService={cartService}
-            updateCartData={updateCartData}
+            key={cartItem.id}
+            cartItem={cartItem}
+            cart={cart}
+            updateCart={updateCart}
           />
         ))}
       </tbody>
     </table>
   );
 };
-
-export default CartTable;

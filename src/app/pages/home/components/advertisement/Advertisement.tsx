@@ -1,9 +1,9 @@
-import AdvertisementItem from './AdvertisementItem';
+import { AdvertisementItem } from './AdvertisementItem';
 
 import { advertisements } from '../../../../../shared/data/data';
 import { AdvertisementItemProps } from '../../../../../shared/models/interface';
 
-const Advertisement = () => {
+export const Advertisement = () => {
   return (
     <section className="advertisement-section">
       <div className="container">
@@ -25,5 +25,3 @@ const Advertisement = () => {
     </section>
   );
 };
-
-export default Advertisement;

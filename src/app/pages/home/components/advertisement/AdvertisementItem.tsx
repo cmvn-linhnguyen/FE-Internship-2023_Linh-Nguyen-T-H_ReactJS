@@ -1,6 +1,6 @@
 import { AdvertisementItemProps } from '../../../../../shared/models/interface';
 
-const AdvertisementItem = (props: AdvertisementItemProps) => {
+export const AdvertisementItem = (props: AdvertisementItemProps) => {
   return (
     <div className="advertisement">
       <img
@@ -20,5 +20,3 @@ const AdvertisementItem = (props: AdvertisementItemProps) => {
     </div>
   );
 };
-
-export default AdvertisementItem;

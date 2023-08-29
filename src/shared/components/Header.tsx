@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-interface HeaderProps {
-  cartItemCount: number;
-}
-
-const Header = ({ cartItemCount }: HeaderProps) => {
+export const Header = (props: { cartQuantity: number }) => {
   const location = useLocation();
 
   const [scrolled, setScrolled] = useState(false);
@@ -78,8 +74,10 @@ const Header = ({ cartItemCount }: HeaderProps) => {
                     src={require('../../assets/icons/ic-cart.svg').default}
                     alt="Cart Icon"
                   />
-                  {cartItemCount > 0 && (
-                    <span className="cart-item-count">{cartItemCount}</span>
+                  {props.cartQuantity > 0 && (
+                    <span className="cart-item-count">
+                      {props.cartQuantity}
+                    </span>
                   )}
                 </Link>
               </li>
@@ -99,5 +97,3 @@ const Header = ({ cartItemCount }: HeaderProps) => {
     </header>
   );
 };
-
-export default Header;

@@ -1,10 +1,8 @@
-import React from 'react';
-
-import ProductList from './products/ProductList';
+import { ProductList } from './products/ProductList';
 
 import { ProductComponentProps } from '../../../../shared/models/interface';
 
-const Recommendation = (props: ProductComponentProps) => {
+export const Recommendation = ({ updateCart }: ProductComponentProps) => {
   return (
     <section className="section section-recommendation">
       <div className="container products-wrap">
@@ -14,13 +12,8 @@ const Recommendation = (props: ProductComponentProps) => {
             SHOW MORE
           </a>
         </div>
-        <ProductList
-          cartService={props.cartService}
-          updateCartData={props.updateCartData}
-        />
+        <ProductList updateCart={updateCart} />
       </div>
     </section>
   );
 };
-
-export default Recommendation;
