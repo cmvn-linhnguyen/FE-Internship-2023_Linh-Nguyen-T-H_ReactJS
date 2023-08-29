@@ -10,11 +10,11 @@ import Header from './shared/components/Header';
 import { CartProps } from './shared/models/interface';
 import { getDataFromLocalStorage } from './shared/utils';
 import { CartService } from './shared/services/cart-service';
-import { LOCAL_STORAGE_KEY } from './shared/constants';
+import { StorageKey } from './shared/constants';
 
 const App = () => {
   const [cartData, setCartData] = useState<CartProps[]>(
-    getDataFromLocalStorage(LOCAL_STORAGE_KEY.Cart)
+    getDataFromLocalStorage(StorageKey.CART)
   );
 
   const cartService = useMemo(() => new CartService(), []);

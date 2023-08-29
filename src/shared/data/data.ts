@@ -1,4 +1,4 @@
-import { STATUS } from '../constants';
+import { Status } from '../constants';
 import {
   AdvertisementItemProps,
   BannerItemProps,
@@ -81,7 +81,7 @@ export const products: ProductProps[] = [
     name: 'T-Shirt Summer Vibes',
     price: 119.99,
     discount: 30,
-    status: STATUS.Available,
+    status: Status.AVAILABLE,
   },
   {
     id: 2,
@@ -89,7 +89,7 @@ export const products: ProductProps[] = [
     name: 'Loose Knit 3/4 Sleeve',
     price: 119.99,
     discount: 0,
-    status: STATUS.Available,
+    status: Status.AVAILABLE,
   },
   {
     id: 3,
@@ -97,7 +97,7 @@ export const products: ProductProps[] = [
     name: 'Basic Slim Fit T-Shirt',
     price: 79.99,
     discount: 0,
-    status: STATUS.Out_of_stock,
+    status: Status.OUT_OF_STOCK,
   },
   {
     id: 4,
@@ -105,6 +105,38 @@ export const products: ProductProps[] = [
     name: 'Loose Textured T-Shirt',
     price: 119.99,
     discount: 0,
-    status: STATUS.Available,
+    status: Status.AVAILABLE,
+  },
+  {
+    id: 5,
+    image: require('../../assets/images/product-4.png'),
+    name: 'Product 1',
+    price: 99.99,
+    discount: 15,
+    status: Status.OUT_OF_STOCK,
+  },
+  {
+    id: 6,
+    image: require('../../assets/images/product-1.png'),
+    name: 'Product 2',
+    price: 149.99,
+    discount: 10,
+    status: Status.AVAILABLE,
+  },
+  {
+    id: 7,
+    image: require('../../assets/images/product-2.png'),
+    name: 'Product 3',
+    price: 89.99,
+    discount: 5,
+    status: Status.AVAILABLE,
+  },
+  {
+    id: 8,
+    image: require('../../assets/images/product-3.png'),
+    name: 'Product 4',
+    price: 109.99,
+    discount: 0,
+    status: Status.AVAILABLE,
   },
 ];

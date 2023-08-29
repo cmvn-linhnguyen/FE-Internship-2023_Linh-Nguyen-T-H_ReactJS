@@ -1,4 +1,4 @@
-import { CART_ACTION } from '../../../../shared/constants';
+import { CartAction } from '../../../../shared/constants';
 import {
   CartComponentProps,
   CartProps,
@@ -15,7 +15,7 @@ const CartItem = ({
     updateCartData(cartService.deleteCart(cartData, id));
   };
 
-  const updateQuantity = (id: number, action: CART_ACTION): void => {
+  const updateQuantity = (id: number, action: CartAction): void => {
     updateCartData(cartService.updateCart(cartData, id, action));
   };
 
@@ -45,14 +45,14 @@ const CartItem = ({
           <button
             className={`quantity-update decrease pro-${cart.id}`}
             disabled={cart.quantity === 1}
-            onClick={() => updateQuantity(cart.id, CART_ACTION.Decrease)}
+            onClick={() => updateQuantity(cart.id, CartAction.DECREASE)}
           >
             -
           </button>
           <p className="item-quantity">{cart.quantity}</p>
           <button
             className={`quantity-update increase pro-${cart.id}`}
-            onClick={() => updateQuantity(cart.id, CART_ACTION.Increase)}
+            onClick={() => updateQuantity(cart.id, CartAction.INCREASE)}
           >
             +
           </button>

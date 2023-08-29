@@ -1,4 +1,4 @@
-import { STATUS } from '../constants';
+import { Status } from '../constants';
 import { CartService } from '../services/cart-service';
 
 export interface AdvertisementItemProps {
@@ -27,7 +27,7 @@ export interface ProductProps {
   image: string;
   price: number;
   discount: number;
-  status: STATUS;
+  status: Status;
 }
 
 export interface CartProps extends Omit<ProductProps, 'status'> {

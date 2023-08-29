@@ -1,4 +1,4 @@
-import { CART_ACTION, LOCAL_STORAGE_KEY } from '../constants';
+import { CartAction, StorageKey } from '../constants';
 import { CartProps } from '../models/interface';
 import { calcCartPrice, saveDataToLocalStorage } from '../utils';
 
@@ -10,7 +10,7 @@ export class CartService {
     } else {
       carts.push(cart);
     }
-    saveDataToLocalStorage(LOCAL_STORAGE_KEY.Cart, carts);
+    saveDataToLocalStorage(StorageKey.CART, carts);
     return carts;
   };
 
@@ -21,13 +21,13 @@ export class CartService {
   updateCart = (
     carts: CartProps[],
     id: number,
-    action: CART_ACTION.Increase | CART_ACTION.Decrease
+    action: CartAction
   ): CartProps[] => {
     return carts.map((cartItem) => {
       if (cartItem.id === id) {
-        if (action === CART_ACTION.Increase)
+        if (action === CartAction.INCREASE)
           return { ...cartItem, quantity: cartItem.quantity + 1 };
-        if (action === CART_ACTION.Decrease && cartItem.quantity > 1)
+        if (action === CartAction.DECREASE && cartItem.quantity > 1)
           return { ...cartItem, quantity: cartItem.quantity - 1 };
       }
       return cartItem;

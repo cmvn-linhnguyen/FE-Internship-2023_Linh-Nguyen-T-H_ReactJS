@@ -1,4 +1,4 @@
-import { LOCAL_STORAGE_KEY, STATUS } from '../../../../../shared/constants';
+import { Status, StorageKey } from '../../../../../shared/constants';
 import {
   CartProps,
   ProductComponentProps,
@@ -27,7 +27,7 @@ const Product = (props: CombinedProps) => {
     };
 
     const updatedCart = props.cartService?.addToCart(
-      getDataFromLocalStorage(LOCAL_STORAGE_KEY.Cart),
+      getDataFromLocalStorage(StorageKey.CART),
       cartItem
     );
     props.updateCartData(updatedCart);
@@ -38,7 +38,7 @@ const Product = (props: CombinedProps) => {
       <div className="product d-flex fd-column">
         <div
           className={`image-wrapper ${
-            props.data.status === STATUS.Out_of_stock ? 'disable' : null
+            props.data.status === Status.OUT_OF_STOCK ? 'disable' : null
           }`}
         >
           <img
@@ -46,10 +46,10 @@ const Product = (props: CombinedProps) => {
             src={props.data.image}
             alt={props.data.name}
           />
-          {props.data.status === STATUS.Out_of_stock && (
+          {props.data.status === Status.OUT_OF_STOCK && (
             <div className="out-of-stock-label">Out of Stock</div>
           )}
-          {props.data.status !== STATUS.Out_of_stock && (
+          {props.data.status !== Status.OUT_OF_STOCK && (
             <button
               className="btn btn-outline add-to-cart-button"
               onClick={() => handleAddToCart(props.data)}

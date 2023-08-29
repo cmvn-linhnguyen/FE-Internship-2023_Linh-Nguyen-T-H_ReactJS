@@ -5,8 +5,8 @@ import CartTable from './components/CartTable';
 import CartSummary from './components/CartSummary';
 
 import { CartComponentProps } from '../../../shared/models/interface';
-import { LOCAL_STORAGE_KEY } from '../../../shared/constants';
 import { saveDataToLocalStorage } from '../../../shared/utils';
+import { StorageKey } from '../../../shared/constants';
 
 const Cart = ({
   cartData,
@@ -18,7 +18,7 @@ const Cart = ({
   }, []);
 
   useEffect(() => {
-    saveDataToLocalStorage(LOCAL_STORAGE_KEY.Cart, cartData);
+    saveDataToLocalStorage(StorageKey.CART, cartData);
   }, [cartData]);
 
   return (
