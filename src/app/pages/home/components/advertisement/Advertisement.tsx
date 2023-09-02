@@ -13,7 +13,7 @@ export const Advertisement = () => {
               <li
                 key={index}
                 className={`col ${
-                  index === 0 ? 'col-6' : 'col-3'
+                  index === 0 ? 'col-6 col-sm-12' : 'col-3 col-sm-6'
                 } advertisement-item`}
               >
                 <AdvertisementItem {...advertisement} />

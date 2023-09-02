@@ -37,7 +37,7 @@ export const Header = (props: { cartQuantity: number }) => {
               alt="E-Shop"
             />
           </Link>
-          <nav className="d-flex ai-center">
+          <nav className="d-flex ai-center hidden-sm">
             <ul className="nav-list d-flex">
               <li className="nav-item">
                 <a className="nav-link" href="/#">
