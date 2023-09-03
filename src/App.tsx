@@ -1,4 +1,3 @@
-import { useCallback, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './stylesheet/style.scss';
@@ -6,23 +5,14 @@ import './stylesheet/style.scss';
 import { Header } from './shared/components';
 import Cart from './app/pages/cart';
 import Home from './app/pages/home';
-
-import { CartItemProps } from './shared/models/interface';
-import {
-  getDataFromLocalStorage,
-  saveDataToLocalStorage,
-} from './shared/utils';
-import { CartService } from './shared/services/cart-service';
+import { useSelector } from 'react-redux';
+import { StateProps } from './redux/store';
+import { useEffect } from 'react';
+import { saveDataToLocalStorage } from './shared/utils';
 import { StorageKeys } from './shared/constants';
 
 const App = () => {
-  const [cart, setCart] = useState<CartItemProps[]>(
-    getDataFromLocalStorage(StorageKeys.CART)
-  );
-
-  const updateCart = useCallback((newCart: CartItemProps[]) => {
-    setCart(newCart);
-  }, []);
+  const cart = useSelector((state: StateProps) => state.cart.cart);
 
   useEffect(() => {
     saveDataToLocalStorage(StorageKeys.CART, cart);
@@ -30,13 +20,10 @@ const App = () => {
 
   return (
     <Router>
-      <Header cartQuantity={new CartService().getQuantity(cart)} />
+      <Header />
       <Routes>
-        <Route path="/" element={<Home updateCart={updateCart} />} />
-        <Route
-          path="/cart"
-          element={<Cart cart={cart} updateCart={updateCart} />}
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
   );

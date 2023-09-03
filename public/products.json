@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "image": "https://img.freepik.com/free-photo/fashionable-woman-pink-coat-black-hat-posing_273443-2426.jpg",
+    "name": "T-Shirt Summer Vibes",
+    "price": 119.99,
+    "discount": 30,
+    "status": "available"
+  },
+  {
+    "id": 2,
+    "image": "https://img.freepik.com/free-photo/vertical-full-length-picture-isolated-image-charming-european-teenage-girl-wearing-stylish-summer-clothes_343059-3431.jpg?w=2000",
+    "name": "Loose Knit 3/4 Sleeve",
+    "price": 119.99,
+    "discount": 0,
+    "status": "available"
+  },
+  {
+    "id": 3,
+    "image": "https://img.freepik.com/free-photo/young-stylish-beautiful-woman-walking-street-wearing-pink-coat_285396-1402.jpg?w=2000",
+    "name": "Basic Slim Fit T-Shirt",
+    "price": 79.99,
+    "discount": 0,
+    "status": "out_of_stock"
+  },
+  {
+    "id": 4,
+    "image": "https://img.freepik.com/free-photo/full-length-portrait-good-humoured-caucasian-woman-dancing-french-beret-indoor-shot-positive-spectacular-girl-with-curly-hair_197531-20336.jpg",
+    "name": "Loose Textured T-Shirt",
+    "price": 119.99,
+    "discount": 0,
+    "status": "available"
+  },
+  {
+    "id": 5,
+    "image": "https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?cs=srgb&dl=pexels-athena-2043590.jpg&fm=jpg",
+    "name": "T-Shirt Summer Vibes",
+    "price": 119.99,
+    "discount": 30,
+    "status": "out_of_stock"
+  },
+  {
+    "id": 6,
+    "image": "https://images.garmentory.com/images/2176156/large/TODD-JUMPSUIT-20190125191046.jpg?1548443449",
+    "name": "Loose Knit 3/4 Sleeve",
+    "price": 119.99,
+    "discount": 15,
+    "status": "available"
+  },
+  {
+    "id": 7,
+    "image": "https://img.freepik.com/premium-photo/trendy-lady-elegant-coat_251859-15669.jpg?w=360",
+    "name": "Basic Slim Fit T-Shirt",
+    "price": 79.99,
+    "discount": 0,
+    "status": "available"
+  },
+  {
+    "id": 8,
+    "image": "https://st2.depositphotos.com/3805597/10781/i/450/depositphotos_107813540-stock-photo-portrait-of-a-young-girl.jpg",
+    "name": "Loose Textured T-Shirt",
+    "price": 119.99,
+    "discount": 0,
+    "status": "available"
+  }
+]

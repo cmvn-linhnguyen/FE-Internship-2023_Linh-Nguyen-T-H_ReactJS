@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { CartEmpty, CartSummary, CartTable } from './components';
 
-import { CartComponentProps } from '../../../shared/models/interface';
 import { CartService } from '../../../shared/services/cart-service';
+import { StateProps } from '../../../redux/store';
 
-const Cart = ({ cart, updateCart }: CartComponentProps) => {
+const Cart = () => {
   const cartService = new CartService();
+  const cart = useSelector((state: StateProps) => state.cart.cart);
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -21,7 +23,7 @@ const Cart = ({ cart, updateCart }: CartComponentProps) => {
             {cart.length > 0 ? (
               <>
                 <div className="col col-9">
-                  <CartTable cart={cart} updateCart={updateCart} />
+                  <CartTable />
                 </div>
                 <div className="col col-3">
                   <CartSummary

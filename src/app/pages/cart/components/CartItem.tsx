@@ -1,23 +1,50 @@
-import {
-  CartComponentProps,
-  CartItemProps,
-} from '../../../../shared/models/interface';
-import { CartService } from '../../../../shared/services/cart-service';
+import { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { CartItemProps } from '../../../../shared/models/interface';
 import { calcCartPrice, calcProductPrice } from '../../../../shared/utils';
+import { removeFromCart, updateCartItem } from '../../../../redux/cart/action';
 
-export const CartItem = ({
-  cartItem,
-  cart,
-  updateCart,
-}: { cartItem: CartItemProps } & CartComponentProps) => {
-  const cartService = new CartService();
+export const CartItem = ({ cartItem }: { cartItem: CartItemProps }) => {
+  const [isEditable, setIsEditable] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
 
-  const handleDelete = (id: number): void => {
-    updateCart(cartService.deleteCart(cart, id));
+  const handleDelete = (id: number) => {
+    dispatch(removeFromCart(id));
   };
 
-  const updateQuantity = (id: number, quantity: number): void => {
-    updateCart(cartService.updateCart(cart, id, quantity));
+  const updateQuantity = (id: number, quantity: number) => {
+    dispatch(updateCartItem(id, quantity));
+  };
+
+  const handleFocus = () => {
+    setIsEditable(true);
+  };
+
+  const onBlurInput = () => {
+    const inputValue = +inputRef.current!.value;
+    if (0 < inputValue && inputValue < 100) {
+      dispatch(updateCartItem(cartItem.id, inputValue));
+    }
+    setIsError(false);
+    setIsEditable(false);
+  };
+
+  const handleInputKeyPress = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (event.key === 'Enter') {
+      const inputValue = +inputRef.current!.value;
+      if (inputValue < 1 || inputValue > 99) {
+        setIsError(true);
+      } else {
+        dispatch(updateCartItem(cartItem.id, inputValue));
+        setIsError(false);
+        setIsEditable(false);
+      }
+    }
   };
 
   return (
@@ -42,9 +69,7 @@ export const CartItem = ({
           ) : (
             <p>${cartItem.price.toFixed(2)}</p>
           )}
-          <p className="item-price">
-            Total: ${calcCartPrice(cartItem).toFixed(2)}
-          </p>
+          <p className="item-price">${calcCartPrice(cartItem).toFixed(2)}</p>
         </div>
       </td>
       <td className="col col-2">
@@ -56,13 +81,31 @@ export const CartItem = ({
           >
             -
           </button>
-          <p className="item-quantity">{cartItem.quantity}</p>
+          {isEditable ? (
+            <input
+              className="item-quantity-input"
+              type="number"
+              autoFocus
+              defaultValue={cartItem.quantity}
+              ref={inputRef}
+              onBlur={onBlurInput}
+              onKeyUp={handleInputKeyPress}
+            />
+          ) : (
+            <span onDoubleClick={handleFocus} className="item-quantity">
+              {cartItem.quantity}
+            </span>
+          )}
           <button
             className={`quantity-update increase pro-${cartItem.id}`}
             onClick={() => updateQuantity(cartItem.id, cartItem.quantity + 1)}
+            disabled={cartItem.quantity === 99}
           >
             +
           </button>
+          {isError && (
+            <span className="error-message">Vui lòng nhập số từ 1 đến 99.</span>
+          )}
         </div>
       </td>
       <td className="col col-2">

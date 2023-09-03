@@ -1,8 +1,6 @@
 import { ProductList } from './products/ProductList';
 
-import { ProductComponentProps } from '../../../../shared/models/interface';
-
-export const Recommendation = ({ updateCart }: ProductComponentProps) => {
+export const Recommendation = () => {
   return (
     <section className="section section-recommendation">
       <div className="container products-wrap">
@@ -12,7 +10,7 @@ export const Recommendation = ({ updateCart }: ProductComponentProps) => {
             SHOW MORE
           </a>
         </div>
-        <ProductList updateCart={updateCart} />
+        <ProductList />
       </div>
     </section>
   );

@@ -1,14 +1,24 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Footer, Newsletter } from '../../../shared/components';
+import {
+  Advertisement,
+  Banner,
+  Recommendation,
+  Benefits,
+  ProductToday,
+} from './components';
 
-import { ProductComponentProps } from '../../../shared/models/interface';
-import { Advertisement, Banner } from './components';
-import { Recommendation } from './components/Recommendation';
-import { Benefits } from './components/benefits/Benefits';
-import { ProductToday } from './components/ProductToday';
+import { fetchProductsRequest } from '../../../redux/products/action';
 
-const Home = React.memo(({ updateCart }: ProductComponentProps) => {
+const Home = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProductsRequest() as any);
+  }, [dispatch]);
+
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -17,13 +27,13 @@ const Home = React.memo(({ updateCart }: ProductComponentProps) => {
     <>
       <Banner />
       <Advertisement />
-      <Recommendation updateCart={updateCart} />
+      <Recommendation />
       <Benefits />
-      <ProductToday updateCart={updateCart} />
+      <ProductToday />
       <Newsletter />
       <Footer />
     </>
   );
-});
+};
 
 export default Home;
