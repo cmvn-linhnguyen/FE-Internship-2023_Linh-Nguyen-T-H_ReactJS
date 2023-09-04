@@ -12,7 +12,7 @@
   &.header-cart {
     position: fixed;
     padding: 16px 0px;
-    background-color: map-get($colors, primary);
+    background-color: map-get($colors, 'primary');
 
     .nav-link {
       color: map-get($colors, 'white');
@@ -44,20 +44,29 @@
       position: relative;
 
       .cart-item-count {
-        position: absolute;
-        top: -8px;
-        right: -8px;
-        background-color: map-get($colors, 'red');
-        border-radius: 50%;
         width: 21px;
         height: 21px;
+
         display: flex;
         justify-content: center;
         align-items: center;
+
+        position: absolute;
+        top: -8px;
+        right: -8px;
+
         font-size: 13px;
         font-weight: bold;
-        color: #fff;
+        color: map-get($colors, 'white');
+        background-color: map-get($colors, 'red');
+        border-radius: 50%;
       }
     }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .hidden-sm {
+    display: none;
   }
 }

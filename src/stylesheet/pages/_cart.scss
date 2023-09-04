@@ -2,6 +2,10 @@
   padding-top: 60px;
   position: relative;
 
+  .section-cart-content {
+    margin: 0px;
+  }
+
   .cart-header,
   .cart-summary {
     background-color: white;
@@ -72,6 +76,9 @@
       background-color: #333;
       color: white;
       text-align: center;
+      position: sticky;
+      top: 139px;
+      z-index: 1;
     }
 
     .table-row {
@@ -105,7 +112,7 @@
         &.decrease[disabled],
         &.increase[disabled] {
           cursor: not-allowed;
-          opacity: 0.6;
+          opacity: 0.4;
         }
       }
 

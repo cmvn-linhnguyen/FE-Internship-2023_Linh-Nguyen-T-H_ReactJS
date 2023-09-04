@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useCallback, useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+import './stylesheet/style.scss';
+
+import { Header } from './shared/components';
+import Cart from './app/pages/cart';
+import Home from './app/pages/home';
+
+import { CartItemProps } from './shared/models/interface';
+import {
+  getDataFromLocalStorage,
+  saveDataToLocalStorage,
+} from './shared/utils';
+import { CartService } from './shared/services/cart-service';
+import { StorageKeys } from './shared/constants';
+
+const App = () => {
+  const [cart, setCart] = useState<CartItemProps[]>(
+    getDataFromLocalStorage(StorageKeys.CART)
   );
-}
+
+  const updateCart = useCallback((newCart: CartItemProps[]) => {
+    setCart(newCart);
+  }, []);
+
+  useEffect(() => {
+    saveDataToLocalStorage(StorageKeys.CART, cart);
+  }, [cart]);
+
+  return (
+    <Router>
+      <Header cartQuantity={new CartService().getQuantity(cart)} />
+      <Routes>
+        <Route path="/" element={<Home updateCart={updateCart} />} />
+        <Route
+          path="/cart"
+          element={<Cart cart={cart} updateCart={updateCart} />}
+        />
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;
