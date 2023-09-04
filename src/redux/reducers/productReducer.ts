@@ -3,7 +3,7 @@ import {
   FETCH_PRODUCTS_FAILURE,
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
-} from './type';
+} from '../types/productType';
 
 export interface ProductsState {
   loading: boolean;

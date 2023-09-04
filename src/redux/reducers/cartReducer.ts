@@ -1,7 +1,11 @@
 import { CartItemProps } from '../../shared/models/interface';
 import { getDataFromLocalStorage } from '../../shared/utils';
 import { StorageKeys } from '../../shared/constants';
-import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_CART_ITEM } from './type';
+import {
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
+  UPDATE_CART_ITEM,
+} from '../types/cartType';
 
 export interface CartState {
   cart: CartItemProps[];

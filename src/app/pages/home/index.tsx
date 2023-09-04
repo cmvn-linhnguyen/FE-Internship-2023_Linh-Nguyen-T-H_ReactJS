@@ -10,7 +10,7 @@ import {
   ProductToday,
 } from './components';
 
-import { fetchProductsRequest } from '../../../redux/products/action';
+import { fetchProductsRequest } from '../../../redux/actions/productAction';
 
 const Home = () => {
   const dispatch = useDispatch();

@@ -3,7 +3,10 @@ import { useDispatch } from 'react-redux';
 
 import { CartItemProps } from '../../../../shared/models/interface';
 import { calcCartPrice, calcProductPrice } from '../../../../shared/utils';
-import { removeFromCart, updateCartItem } from '../../../../redux/cart/action';
+import {
+  removeFromCart,
+  updateCartItem,
+} from '../../../../redux/actions/cartAction';
 
 export const CartItem = ({ cartItem }: { cartItem: CartItemProps }) => {
   const [isEditable, setIsEditable] = useState(false);
