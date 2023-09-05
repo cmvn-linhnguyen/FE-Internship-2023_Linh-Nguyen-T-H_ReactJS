@@ -1,22 +1,20 @@
-import { StorageKeys } from '../../shared/constants';
 import { ProductProps } from '../../shared/models/interface';
-import { getDataFromLocalStorage } from '../../shared/utils';
 import {
   FETCH_PRODUCTS_FAILURE,
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
-} from '../types/productType';
+} from '../types/product';
 
 export interface ProductsState {
-  loading: boolean;
+  isLoading: boolean;
   products: ProductProps[];
-  error: string;
+  error: any;
 }
 
 const initialData: ProductsState = {
-  loading: false,
-  products: getDataFromLocalStorage(StorageKeys.PRODUCTS),
-  error: '',
+  isLoading: false,
+  products: [],
+  error: null,
 };
 
 export const productsReducer = (
@@ -24,17 +22,18 @@ export const productsReducer = (
   action: any
 ): ProductsState => {
   const objReducer: Record<string, () => ProductsState> = {
-    [FETCH_PRODUCTS_REQUEST]: () => ({ ...state, loading: true }),
+    [FETCH_PRODUCTS_REQUEST]: () => ({ ...state, isLoading: true }),
 
     [FETCH_PRODUCTS_SUCCESS]: () => ({
       ...state,
-      loading: false,
+      isLoading: false,
       products: action.payload,
+      error: null,
     }),
 
     [FETCH_PRODUCTS_FAILURE]: () => ({
       ...state,
-      loading: false,
+      isLoading: false,
       error: action.payload,
     }),
   };

@@ -3,10 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { CartItemProps } from '../../../../shared/models/interface';
 import { calcCartPrice, calcProductPrice } from '../../../../shared/utils';
-import {
-  removeFromCart,
-  updateCartItem,
-} from '../../../../redux/actions/cartAction';
+import { removeFromCart, updateCartItem } from '../../../../redux/actions/cart';
 
 export const CartItem = ({ cartItem }: { cartItem: CartItemProps }) => {
   const [isEditable, setIsEditable] = useState(false);
@@ -27,7 +24,7 @@ export const CartItem = ({ cartItem }: { cartItem: CartItemProps }) => {
   };
 
   const onBlurInput = () => {
-    const inputValue = +inputRef.current!.value;
+    const inputValue = Math.floor(+inputRef.current!.value);
     if (0 < inputValue && inputValue < 100) {
       dispatch(updateCartItem(cartItem.id, inputValue));
     }
@@ -39,7 +36,7 @@ export const CartItem = ({ cartItem }: { cartItem: CartItemProps }) => {
     event: React.KeyboardEvent<HTMLInputElement>
   ) => {
     if (event.key === 'Enter') {
-      const inputValue = +inputRef.current!.value;
+      const inputValue = Math.floor(+inputRef.current!.value);
       if (inputValue < 1 || inputValue > 99) {
         setIsError(true);
       } else {

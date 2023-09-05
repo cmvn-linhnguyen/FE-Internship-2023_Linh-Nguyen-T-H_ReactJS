@@ -5,7 +5,7 @@ import {
   ProductProps,
 } from '../../../../../shared/models/interface';
 import { calcProductPrice } from '../../../../../shared/utils';
-import { addToCart } from '../../../../../redux/actions/cartAction';
+import { addToCart } from '../../../../../redux/actions/cart';
 
 export const Product = ({ product }: { product: ProductProps }) => {
   const dispatch = useDispatch();

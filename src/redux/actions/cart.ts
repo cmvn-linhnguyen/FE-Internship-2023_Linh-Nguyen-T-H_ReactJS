@@ -1,9 +1,5 @@
 import { CartItemProps } from '../../shared/models/interface';
-import {
-  ADD_TO_CART,
-  REMOVE_FROM_CART,
-  UPDATE_CART_ITEM,
-} from '../types/cartType';
+import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_CART_ITEM } from '../types/cart';
 
 export const addToCart = (cart: CartItemProps) => {
   return { type: ADD_TO_CART, payload: cart };

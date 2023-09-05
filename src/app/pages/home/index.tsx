@@ -9,20 +9,15 @@ import {
   Benefits,
   ProductToday,
 } from './components';
-
-import { fetchProductsRequest } from '../../../redux/actions/productAction';
-import { getDataFromLocalStorage } from '../../../shared/utils';
-import { StorageKeys } from '../../../shared/constants';
+import { fetchProductsRequest } from '../../../redux/actions/product';
 
 const Home = () => {
   const dispatch = useDispatch();
 
-  if (!getDataFromLocalStorage(StorageKeys.PRODUCTS).length)
-    dispatch(fetchProductsRequest() as any);
-
   useEffect(() => {
     window.scroll(0, 0);
-  }, []);
+    dispatch(fetchProductsRequest() as any);
+  }, [dispatch]);
 
   return (
     <>
