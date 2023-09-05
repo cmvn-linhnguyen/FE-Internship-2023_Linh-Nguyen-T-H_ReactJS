@@ -1,13 +1,13 @@
 import { StorageKeys } from '../constants';
 import { CartItemProps, ProductProps } from '../models/interface';
 
-export const getDataFromLocalStorage = (key: StorageKeys): CartItemProps[] => {
+export const getDataFromLocalStorage = (key: StorageKeys) => {
   return JSON.parse(localStorage.getItem(key) || '[]');
 };
 
 export const saveDataToLocalStorage = (
   key: StorageKeys,
-  data: CartItemProps[]
+  data: CartItemProps[] | ProductProps[]
 ): void => {
   localStorage.setItem(key, JSON.stringify(data));
 };

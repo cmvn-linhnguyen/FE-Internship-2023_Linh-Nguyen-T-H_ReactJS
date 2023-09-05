@@ -1,4 +1,6 @@
+import { StorageKeys } from '../../shared/constants';
 import { ProductProps } from '../../shared/models/interface';
+import { saveDataToLocalStorage } from '../../shared/utils';
 import {
   FETCH_PRODUCTS_FAILURE,
   FETCH_PRODUCTS_REQUEST,
@@ -10,7 +12,10 @@ export const fetchProductsRequest = () => async (dispatch: any) => {
 
   return fetch('./products.json')
     .then((response) => response.json())
-    .then((data) => dispatch(fetchProductsSuccess(data)))
+    .then((data) => {
+      saveDataToLocalStorage(StorageKeys.PRODUCTS, data);
+      dispatch(fetchProductsSuccess(data));
+    })
     .catch((error) => dispatch(fetchProductsFailure(error)));
 };
 

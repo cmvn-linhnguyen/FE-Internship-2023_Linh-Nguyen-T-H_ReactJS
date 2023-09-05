@@ -1,4 +1,6 @@
+import { StorageKeys } from '../../shared/constants';
 import { ProductProps } from '../../shared/models/interface';
+import { getDataFromLocalStorage } from '../../shared/utils';
 import {
   FETCH_PRODUCTS_FAILURE,
   FETCH_PRODUCTS_REQUEST,
@@ -13,7 +15,7 @@ export interface ProductsState {
 
 const initialData: ProductsState = {
   loading: false,
-  products: [],
+  products: getDataFromLocalStorage(StorageKeys.PRODUCTS),
   error: '',
 };
 

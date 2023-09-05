@@ -11,13 +11,14 @@ import {
 } from './components';
 
 import { fetchProductsRequest } from '../../../redux/actions/productAction';
+import { getDataFromLocalStorage } from '../../../shared/utils';
+import { StorageKeys } from '../../../shared/constants';
 
 const Home = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  if (!getDataFromLocalStorage(StorageKeys.PRODUCTS).length)
     dispatch(fetchProductsRequest() as any);
-  }, [dispatch]);
 
   useEffect(() => {
     window.scroll(0, 0);
