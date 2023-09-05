@@ -1,8 +1,16 @@
+import { useSelector } from 'react-redux';
+
 import { ProductList } from './products/ProductList';
+import { StateProps } from '../../../../redux/store';
+import { error } from 'console';
 
-import { ProductComponentProps } from '../../../../shared/models/interface';
+export const Recommendation = () => {
+  const products = useSelector((state: StateProps) => state.products.products);
+  const isLoading = useSelector(
+    (state: StateProps) => state.products.isLoading
+  );
+  const error = useSelector((state: StateProps) => state.products.error);
 
-export const Recommendation = ({ updateCart }: ProductComponentProps) => {
   return (
     <section className="section section-recommendation">
       <div className="container products-wrap">
@@ -12,7 +20,7 @@ export const Recommendation = ({ updateCart }: ProductComponentProps) => {
             SHOW MORE
           </a>
         </div>
-        <ProductList updateCart={updateCart} />
+        <ProductList products={products} isLoading={isLoading} error={error} />
       </div>
     </section>
   );

@@ -1,7 +1,12 @@
-import { CartComponentProps } from '../../../../shared/models/interface';
+import { useSelector } from 'react-redux';
+
 import { CartItem } from '../components';
 
-export const CartTable = ({ cart, updateCart }: CartComponentProps) => {
+import { StateProps } from '../../../../redux/store';
+
+export const CartTable = () => {
+  const cart = useSelector((state: StateProps) => state.cart.cart);
+
   return (
     <table className="cart-table">
       <thead>
@@ -15,12 +20,7 @@ export const CartTable = ({ cart, updateCart }: CartComponentProps) => {
       </thead>
       <tbody>
         {cart.map((cartItem) => (
-          <CartItem
-            key={cartItem.id}
-            cartItem={cartItem}
-            cart={cart}
-            updateCart={updateCart}
-          />
+          <CartItem key={cartItem.id} cartItem={cartItem} />
         ))}
       </tbody>
     </table>

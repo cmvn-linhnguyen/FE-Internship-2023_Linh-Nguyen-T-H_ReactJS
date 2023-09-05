@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import { CartService } from '../services/cart-service';
+import { StateProps } from '../../redux/store';
 
-export const Header = (props: { cartQuantity: number }) => {
+export const Header = () => {
+  const cart = useSelector((state: StateProps) => state.cart.cart);
+  const cartService = new CartService();
+
   const location = useLocation();
-
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -14,9 +19,7 @@ export const Header = (props: { cartQuantity: number }) => {
         setScrolled(false);
       }
     };
-
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -25,7 +28,7 @@ export const Header = (props: { cartQuantity: number }) => {
   return (
     <header
       className={`header ${
-        location.pathname === '/cart' || scrolled ? 'header-cart' : null
+        location.pathname === '/cart' || scrolled ? 'header-cart' : ''
       }`}
     >
       <div className="container">
@@ -74,9 +77,9 @@ export const Header = (props: { cartQuantity: number }) => {
                     src={require('../../assets/icons/ic-cart.svg').default}
                     alt="Cart Icon"
                   />
-                  {props.cartQuantity > 0 && (
+                  {cartService.getQuantity(cart) > 0 && (
                     <span className="cart-item-count">
-                      {props.cartQuantity}
+                      {cartService.getQuantity(cart)}
                     </span>
                   )}
                 </Link>

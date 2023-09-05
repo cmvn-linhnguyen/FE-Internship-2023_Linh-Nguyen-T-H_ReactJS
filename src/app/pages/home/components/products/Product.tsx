@@ -1,19 +1,14 @@
-import { Status, StorageKeys } from '../../../../../shared/constants';
+import { useDispatch } from 'react-redux';
+import { Status } from '../../../../../shared/constants';
 import {
   CartItemProps,
-  ProductComponentProps,
   ProductProps,
 } from '../../../../../shared/models/interface';
-import { CartService } from '../../../../../shared/services/cart-service';
-import {
-  calcProductPrice,
-  getDataFromLocalStorage,
-} from '../../../../../shared/utils';
+import { calcProductPrice } from '../../../../../shared/utils';
+import { addToCart } from '../../../../../redux/actions/cart';
 
-type CombinedProps = { product: ProductProps } & ProductComponentProps;
-
-export const Product = ({ product, updateCart }: CombinedProps) => {
-  const cartService = new CartService();
+export const Product = ({ product }: { product: ProductProps }) => {
+  const dispatch = useDispatch();
 
   const handleAddToCart = (product: ProductProps) => {
     const cartItem: CartItemProps = {
@@ -25,12 +20,7 @@ export const Product = ({ product, updateCart }: CombinedProps) => {
       quantity: 1,
     };
 
-    updateCart(
-      cartService?.addToCart(
-        getDataFromLocalStorage(StorageKeys.CART),
-        cartItem
-      )
-    );
+    dispatch(addToCart(cartItem));
   };
 
   return (
@@ -46,7 +36,7 @@ export const Product = ({ product, updateCart }: CombinedProps) => {
           alt={product.name}
         />
         {product.status === Status.OUT_OF_STOCK ? (
-          <div className="out-of-stock-label">Out of Stock</div>
+          <div className="out-of-stock-label">sold out</div>
         ) : (
           <button
             className="btn btn-outline add-to-cart-button"
