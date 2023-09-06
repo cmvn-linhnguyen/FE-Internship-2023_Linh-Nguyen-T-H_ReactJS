@@ -7,3 +7,8 @@ export enum StorageKeys {
   CART = 'cart',
   PRODUCTS = 'products',
 }
+
+export enum ToastTypes {
+  SUCCESS = 'success',
+  FAILED = 'failed',
+}

@@ -1,5 +1,6 @@
 import { UserProps } from '../../shared/models/interface';
 import {
+  CLEAR_ERROR,
   LOGIN_FAILED,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -36,6 +37,11 @@ export const authReducer = (state = initialData, action: any): AuthState => {
       ...state,
       isLoading: false,
       error: action.payload,
+    }),
+
+    [CLEAR_ERROR]: () => ({
+      ...state,
+      error: null,
     }),
 
     [LOGOUT]: () => ({

@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { CartEmpty, CartSummary, CartTable } from './components';
 
 import { CartService } from '../../../shared/services/cart-service';
 import { StateProps } from '../../../redux/store';
-import Modal from '../../../shared/components/Modal';
-import Login from '../../../shared/components/Login';
 import { useNavigate } from 'react-router-dom';
 
-const Cart = () => {
+export const Cart = () => {
   const cartService = new CartService();
   const cart = useSelector((state: StateProps) => state.cart.cart);
   const navigate = useNavigate();
@@ -27,9 +25,6 @@ const Cart = () => {
 
   return (
     <main>
-      <Modal>
-        <Login />
-      </Modal>
       <section className="section section-cart">
         <h3 className="cart-header">Shopping Cart</h3>
         <div className="container">
@@ -57,5 +52,3 @@ const Cart = () => {
     </main>
   );
 };
-
-export default Cart;

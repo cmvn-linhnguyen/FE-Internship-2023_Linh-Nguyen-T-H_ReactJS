@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+
 import { CartService } from '../services/cart-service';
 import { StateProps } from '../../redux/store';
 import { ModalContext } from '../../context';
@@ -93,7 +94,11 @@ export const Header = () => {
                 </a>
               </li>
               <li className="action-item">
-                <button className="header-action-link" onClick={handleNavigate}>
+                <Link
+                  to={isLogged ? '/cart' : '#'}
+                  className="header-action-link"
+                  onClick={handleNavigate}
+                >
                   <img
                     className="icon action-icon"
                     src={require('../../assets/icons/ic-cart.svg').default}
@@ -104,7 +109,7 @@ export const Header = () => {
                       {cartService.getQuantity(cart)}
                     </span>
                   )}
-                </button>
+                </Link>
               </li>
               <li className="action-item">
                 <button className="header-action-link" onClick={handleAction}>

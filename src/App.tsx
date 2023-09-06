@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-import './stylesheet/style.scss';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 
 import { Header } from './shared/components';
-import Cart from './app/pages/cart';
-import Home from './app/pages/home';
+import { Cart, Home } from './app/pages';
+
 import { StateProps } from './redux/store';
+import { ModalContext } from './context';
 import { saveDataToLocalStorage } from './shared/utils';
 import { StorageKeys } from './shared/constants';
-import { ModalContext } from './context';
 
 const App = () => {
   const cart = useSelector((state: StateProps) => state.cart.cart);
+  const isLogged = useSelector((state: StateProps) => state.auth.isLogged);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -26,7 +30,11 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
+          {isLogged ? (
+            <Route path="/cart" element={<Cart />} />
+          ) : (
+            <Route path="/cart" element={<Navigate to="/" replace />} />
+          )}
         </Routes>
       </Router>
     </ModalContext.Provider>

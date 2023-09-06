@@ -1,5 +1,6 @@
 import { UserProps } from '../../shared/models/interface';
 import {
+  CLEAR_ERROR,
   LOGIN_FAILED,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -33,6 +34,10 @@ export const loginSuccess = (user: UserProps) => {
 
 export const loginFailed = (error: any) => {
   return { type: LOGIN_FAILED, payload: error };
+};
+
+export const clearError = () => {
+  return { type: CLEAR_ERROR };
 };
 
 export const logout = () => {
