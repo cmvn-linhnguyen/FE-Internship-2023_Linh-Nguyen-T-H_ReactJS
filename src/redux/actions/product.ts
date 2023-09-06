@@ -17,7 +17,6 @@ export const fetchProductsRequest = () => async (dispatch: any) => {
       dispatch(fetchProductsSuccess(data));
     } catch (error) {
       dispatch(fetchProductsFailure(error));
-      console.log(error);
     }
   }, 2000);
 };

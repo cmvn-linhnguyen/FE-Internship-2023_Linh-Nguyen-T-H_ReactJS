@@ -12,3 +12,9 @@
 .text-highlight {
   color: map-get($colors, 'primary');
 }
+
+.text-error {
+  margin-bottom: 5px;
+  font-size: map-get($font-sizes, '2xs');
+  color: map-get($colors, 'red');
+}

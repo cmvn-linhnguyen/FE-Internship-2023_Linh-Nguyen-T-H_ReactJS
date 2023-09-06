@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Footer, Newsletter } from '../../../shared/components';
@@ -10,6 +10,8 @@ import {
   ProductToday,
 } from './components';
 import { fetchProductsRequest } from '../../../redux/actions/product';
+import Modal from '../../../shared/components/Modal';
+import Login from '../../../shared/components/Login';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -20,7 +22,10 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <div className="home-wrap">
+      <Modal>
+        <Login />
+      </Modal>
       <Banner />
       <Advertisement />
       <Recommendation />
@@ -28,7 +33,7 @@ const Home = () => {
       <ProductToday />
       <Newsletter />
       <Footer />
-    </>
+    </div>
   );
 };
 

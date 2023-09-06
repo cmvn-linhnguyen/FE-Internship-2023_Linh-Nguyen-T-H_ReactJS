@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Status } from '../../../../../shared/constants';
 import {
   CartItemProps,
@@ -6,21 +6,30 @@ import {
 } from '../../../../../shared/models/interface';
 import { calcProductPrice } from '../../../../../shared/utils';
 import { addToCart } from '../../../../../redux/actions/cart';
+import { StateProps } from '../../../../../redux/store';
+import { useContext } from 'react';
+import { ModalContext } from '../../../../../context';
 
 export const Product = ({ product }: { product: ProductProps }) => {
   const dispatch = useDispatch();
+  const isLogged = useSelector((state: StateProps) => state.auth.isLogged);
+  const { setIsOpen } = useContext(ModalContext);
 
   const handleAddToCart = (product: ProductProps) => {
-    const cartItem: CartItemProps = {
-      id: product.id,
-      name: product.name,
-      image: product.image,
-      price: product.price,
-      discount: product.discount || 0,
-      quantity: 1,
-    };
+    if (isLogged) {
+      const cartItem: CartItemProps = {
+        id: product.id,
+        name: product.name,
+        image: product.image,
+        price: product.price,
+        discount: product.discount || 0,
+        quantity: 1,
+      };
 
-    dispatch(addToCart(cartItem));
+      dispatch(addToCart(cartItem));
+    } else {
+      setIsOpen(true);
+    }
   };
 
   return (

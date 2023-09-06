@@ -5,17 +5,31 @@ import { CartEmpty, CartSummary, CartTable } from './components';
 
 import { CartService } from '../../../shared/services/cart-service';
 import { StateProps } from '../../../redux/store';
+import Modal from '../../../shared/components/Modal';
+import Login from '../../../shared/components/Login';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const cartService = new CartService();
   const cart = useSelector((state: StateProps) => state.cart.cart);
+  const navigate = useNavigate();
+  const isLogged = useSelector((state: StateProps) => state.auth.isLogged);
 
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
 
+  useEffect(() => {
+    if (!isLogged) {
+      navigate('/');
+    }
+  }, [isLogged, navigate]);
+
   return (
     <main>
+      <Modal>
+        <Login />
+      </Modal>
       <section className="section section-cart">
         <h3 className="cart-header">Shopping Cart</h3>
         <div className="container">

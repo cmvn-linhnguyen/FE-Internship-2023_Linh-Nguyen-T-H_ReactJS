@@ -1,0 +1,26 @@
+.toast {
+  &-wrap {
+    width: 400px;
+    height: 70px;
+    position: absolute;
+    z-index: 6;
+    top: 0px;
+    left: 50%;
+    background-color: white;
+    border-radius: 10px;
+  }
+
+  &-success {
+    border-top: 5px solid #a8df8e;
+    p {
+      color: #a8df8e;
+    }
+  }
+
+  &-failed {
+    border-top: 4px solid #c63d2f;
+    p {
+      color: #c63d2f;
+    }
+  }
+}

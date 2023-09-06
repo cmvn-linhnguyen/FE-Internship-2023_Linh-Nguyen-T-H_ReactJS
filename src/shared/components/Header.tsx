@@ -1,12 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CartService } from '../services/cart-service';
 import { StateProps } from '../../redux/store';
+import { ModalContext } from '../../context';
+import { logout } from '../../redux/actions/auth';
 
 export const Header = () => {
   const cart = useSelector((state: StateProps) => state.cart.cart);
   const cartService = new CartService();
+  const { setIsOpen } = useContext(ModalContext);
+  const isLogged = useSelector((state: StateProps) => state.auth.isLogged);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
@@ -24,6 +30,22 @@ export const Header = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const handleAction = () => {
+    if (isLogged) {
+      dispatch(logout());
+    } else {
+      setIsOpen(true);
+    }
+  };
+
+  const handleNavigate = () => {
+    if (isLogged) {
+      navigate('/cart');
+    } else {
+      setIsOpen(true);
+    }
+  };
 
   return (
     <header
@@ -71,27 +93,23 @@ export const Header = () => {
                 </a>
               </li>
               <li className="action-item">
-                <Link className="header-action-link" to="/cart">
+                <button className="header-action-link" onClick={handleNavigate}>
                   <img
                     className="icon action-icon"
                     src={require('../../assets/icons/ic-cart.svg').default}
                     alt="Cart Icon"
                   />
-                  {cartService.getQuantity(cart) > 0 && (
+                  {cartService.getQuantity(cart) > 0 && isLogged && (
                     <span className="cart-item-count">
                       {cartService.getQuantity(cart)}
                     </span>
                   )}
-                </Link>
+                </button>
               </li>
               <li className="action-item">
-                <a className="header-action-link" href="/#">
-                  <img
-                    className="icon action-icon"
-                    src={require('../../assets/icons/ic-person.svg').default}
-                    alt="Person Icon"
-                  />
-                </a>
+                <button className="header-action-link" onClick={handleAction}>
+                  {isLogged ? 'Logout' : 'Login'}
+                </button>
               </li>
             </ul>
           </div>
