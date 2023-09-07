@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Footer, Login, Modal, Newsletter } from '../../../shared/components';
@@ -22,6 +22,7 @@ export const Home = () => {
   const isOpen = useSelector((state: StateProps) => state.modal.isOpen);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.pathname === '/cart') dispatch(toggleModal(true));
@@ -33,10 +34,15 @@ export const Home = () => {
       dispatch(fetchProductsRequest() as any);
   }, [dispatch]);
 
+  const handleModalClose = () => {
+    if (location.pathname !== '/') navigate('/');
+    dispatch(toggleModal(false));
+  };
+
   return (
     <div className="home-wrap">
       {isOpen && (
-        <Modal>
+        <Modal onClose={handleModalClose}>
           <Login />
         </Modal>
       )}

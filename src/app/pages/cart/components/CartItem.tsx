@@ -3,9 +3,18 @@ import { useDispatch } from 'react-redux';
 
 import { CartItemProps } from '../../../../shared/models/interface';
 import { calcCartPrice, calcProductPrice } from '../../../../shared/utils';
-import { removeFromCart, updateCartItem } from '../../../../redux/actions/cart';
+import { updateCartItem } from '../../../../redux/actions/cart';
+import { toggleModal } from '../../../../redux/actions/modal';
 
-export const CartItem = ({ cartItem }: { cartItem: CartItemProps }) => {
+interface CartItemComponentProps {
+  cartItem: CartItemProps;
+  updateIdToDelete: (id: number) => void;
+}
+
+export const CartItem = ({
+  cartItem,
+  updateIdToDelete,
+}: CartItemComponentProps) => {
   const dispatch = useDispatch();
 
   const [isEditable, setIsEditable] = useState(false);
@@ -14,7 +23,8 @@ export const CartItem = ({ cartItem }: { cartItem: CartItemProps }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleDelete = (id: number) => {
-    dispatch(removeFromCart(id));
+    dispatch(toggleModal(true));
+    updateIdToDelete(id);
   };
 
   const updateQuantity = (id: number, quantity: number) => {

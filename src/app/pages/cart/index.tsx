@@ -1,16 +1,37 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { Modal } from '../../../shared/components';
+import { ConfirmContent } from '../../../shared/components/ConfirmContent';
 import { CartEmpty, CartSummary, CartTable } from './components';
 
 import { CartService } from '../../../shared/services/cart-service';
 import { StateProps } from '../../../redux/store';
-import { Modal } from '../../../shared/components';
+import { toggleModal } from '../../../redux/actions/modal';
+import { removeFromCart } from '../../../redux/actions/cart';
 
 export const Cart = () => {
+  const dispatch = useDispatch();
+
   const cartService = new CartService();
+
   const cart = useSelector((state: StateProps) => state.cart.cart);
   const isOpen = useSelector((state: StateProps) => state.modal.isOpen);
+
+  const [idToDelete, setIdToDelete] = useState(-1);
+
+  const updateIdToDelete = (id: number) => {
+    setIdToDelete(id);
+  };
+
+  const deleteItem = () => {
+    dispatch(removeFromCart(idToDelete));
+    dispatch(toggleModal(false));
+  };
+
+  const handleModalClose = () => {
+    dispatch(toggleModal(false));
+  };
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -20,8 +41,13 @@ export const Cart = () => {
     <main>
       <section className="section section-cart">
         {isOpen && (
-          <Modal>
-            <p>aaaaaa</p>
+          <Modal onClose={handleModalClose}>
+            <ConfirmContent
+              title="Confirm deletion"
+              message="Are you sure you want to delete this item?"
+              labelAction="Delete"
+              action={deleteItem}
+            />
           </Modal>
         )}
         <h3 className="cart-header">Shopping Cart</h3>
@@ -30,7 +56,7 @@ export const Cart = () => {
             {cart.length > 0 ? (
               <>
                 <div className="col col-9">
-                  <CartTable />
+                  <CartTable updateIdToDelete={updateIdToDelete} />
                 </div>
                 <div className="col col-3">
                   <CartSummary

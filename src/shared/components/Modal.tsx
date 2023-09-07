@@ -1,20 +1,15 @@
 import React, { useRef, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import CloseIcon from '../../assets/icons/ic-close.svg';
 
-import { toggleModal } from '../../redux/actions/modal';
-
 interface ModalProps {
   children: React.ReactNode;
+  onClose: () => void;
 }
 
-export const Modal = ({ children }: ModalProps) => {
+export const Modal = ({ children, onClose }: ModalProps) => {
   const dispatch = useDispatch();
-
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -24,25 +19,19 @@ export const Modal = ({ children }: ModalProps) => {
         modalRef.current &&
         !modalRef.current.contains(event.target as Node)
       ) {
-        dispatch(toggleModal(false));
-        if (location.pathname !== '/') navigate('/');
+        onClose();
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [dispatch, navigate, location.pathname]);
-
-  const handleClose = () => {
-    dispatch(toggleModal(false));
-    if (location.pathname !== '/') navigate('/');
-  };
+  }, [dispatch, onClose]);
 
   return (
     <div className="modal-overlay">
       <div ref={modalRef} className="modal">
-        <button className="close-button" onClick={handleClose}>
+        <button className="close-button" onClick={onClose}>
           <img src={CloseIcon} alt="Close Icon" />
         </button>
         {children}
