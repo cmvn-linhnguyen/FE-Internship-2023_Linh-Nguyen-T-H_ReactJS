@@ -4,7 +4,11 @@ import { CartItem } from '../components';
 
 import { StateProps } from '../../../../redux/store';
 
-export const CartTable = () => {
+export const CartTable = ({
+  updateIdToDelete,
+}: {
+  updateIdToDelete: (id: number) => void;
+}) => {
   const cart = useSelector((state: StateProps) => state.cart.cart);
 
   return (
@@ -20,7 +24,11 @@ export const CartTable = () => {
       </thead>
       <tbody>
         {cart.map((cartItem) => (
-          <CartItem key={cartItem.id} cartItem={cartItem} />
+          <CartItem
+            updateIdToDelete={updateIdToDelete}
+            key={cartItem.id}
+            cartItem={cartItem}
+          />
         ))}
       </tbody>
     </table>

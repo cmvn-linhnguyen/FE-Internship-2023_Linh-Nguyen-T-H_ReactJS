@@ -104,11 +104,7 @@
       .delete-button {
         padding: 5px 10px;
         cursor: pointer;
-        transition: background-color 0.3s;
-
-        &:hover {
-          background-color: #ddd;
-        }
+        transition: background-color 0.2s;
       }
 
       .quantity-update {
@@ -124,6 +120,10 @@
           cursor: not-allowed;
           opacity: 0.4;
         }
+
+        &:hover {
+          background-color: #ddd;
+        }
       }
 
       .delete-button {
@@ -132,6 +132,10 @@
         border-radius: 4px;
         font-size: 14px;
         color: white;
+
+        &:hover {
+          background-color: #c82014;
+        }
       }
 
       .price-wrap {

@@ -5,10 +5,11 @@ export const getDataFromLocalStorage = (key: StorageKeys) => {
   return JSON.parse(localStorage.getItem(key) || '[]');
 };
 
-export const saveDataToLocalStorage = (
-  key: StorageKeys,
-  data: CartItemProps[] | ProductProps[]
-): void => {
+export const getObjectFromLocalStorage = (key: StorageKeys) => {
+  return JSON.parse(localStorage.getItem(key) || 'null');
+};
+
+export const saveDataToLocalStorage = (key: StorageKeys, data: any): void => {
   localStorage.setItem(key, JSON.stringify(data));
 };
 

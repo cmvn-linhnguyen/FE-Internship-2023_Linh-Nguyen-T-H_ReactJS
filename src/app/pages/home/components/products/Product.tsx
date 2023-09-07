@@ -1,26 +1,35 @@
-import { useDispatch } from 'react-redux';
-import { Status } from '../../../../../shared/constants';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   CartItemProps,
   ProductProps,
 } from '../../../../../shared/models/interface';
+import { Status } from '../../../../../shared/constants';
 import { calcProductPrice } from '../../../../../shared/utils';
+
 import { addToCart } from '../../../../../redux/actions/cart';
+import { StateProps } from '../../../../../redux/store';
+import { toggleModal } from '../../../../../redux/actions/modal';
 
 export const Product = ({ product }: { product: ProductProps }) => {
   const dispatch = useDispatch();
+  const user = useSelector((state: StateProps) => state.auth.user);
 
   const handleAddToCart = (product: ProductProps) => {
-    const cartItem: CartItemProps = {
-      id: product.id,
-      name: product.name,
-      image: product.image,
-      price: product.price,
-      discount: product.discount || 0,
-      quantity: 1,
-    };
+    if (user) {
+      const cartItem: CartItemProps = {
+        id: product.id,
+        name: product.name,
+        image: product.image,
+        price: product.price,
+        discount: product.discount || 0,
+        quantity: 1,
+      };
 
-    dispatch(addToCart(cartItem));
+      dispatch(addToCart(cartItem));
+    } else {
+      dispatch(toggleModal(true));
+    }
   };
 
   return (

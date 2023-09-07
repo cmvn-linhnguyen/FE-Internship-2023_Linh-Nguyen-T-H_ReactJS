@@ -46,3 +46,8 @@ export interface CartSummaryProps {
   totalItems: number;
   totalPrice: number;
 }
+
+export interface UserProps {
+  email: string;
+  password: string;
+}

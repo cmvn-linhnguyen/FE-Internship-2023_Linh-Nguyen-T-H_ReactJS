@@ -1,10 +1,10 @@
-import { Product } from './Product';
+import { useDispatch } from 'react-redux';
 
-import { ProductProps } from '../../../../../shared/models/interface';
+import { Product } from './Product';
 
 import ErrorIcon from '../../../../../assets/icons/ic-error.svg';
 import RefreshIcon from '../../../../../assets/icons/ic-refresh.svg';
-import { useDispatch } from 'react-redux';
+import { ProductProps } from '../../../../../shared/models/interface';
 import { fetchProductsRequest } from '../../../../../redux/actions/product';
 
 interface ProductListProps {
