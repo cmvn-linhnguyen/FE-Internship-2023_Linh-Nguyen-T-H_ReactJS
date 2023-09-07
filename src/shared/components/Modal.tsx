@@ -1,14 +1,16 @@
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import CloseIcon from '../../assets/icons/ic-close.svg';
-import { ModalContext } from '../../context';
+import { useDispatch } from 'react-redux';
+import { toggleModal } from '../../redux/actions/modal';
 
 interface ModalProps {
   children: React.ReactNode;
 }
 
 const Modal = ({ children }: ModalProps) => {
-  const { setIsOpen } = useContext(ModalContext);
+  const dispatch = useDispatch();
+
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -17,19 +19,22 @@ const Modal = ({ children }: ModalProps) => {
         modalRef.current &&
         !modalRef.current.contains(event.target as Node)
       ) {
-        setIsOpen(false);
+        dispatch(toggleModal(false));
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [setIsOpen]);
+  }, [dispatch]);
 
   return (
     <div className="modal-overlay">
       <div ref={modalRef} className="modal">
-        <button className="close-button" onClick={() => setIsOpen(false)}>
+        <button
+          className="close-button"
+          onClick={() => dispatch(toggleModal(false))}
+        >
           <img src={CloseIcon} alt="Close Icon" />
         </button>
         {children}

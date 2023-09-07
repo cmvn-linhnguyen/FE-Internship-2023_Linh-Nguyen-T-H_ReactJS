@@ -1,17 +1,16 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { CartService } from '../services/cart-service';
 import { StateProps } from '../../redux/store';
-import { ModalContext } from '../../context';
 import { logout } from '../../redux/actions/auth';
+import { toggleModal } from '../../redux/actions/modal';
 
 export const Header = () => {
   const cart = useSelector((state: StateProps) => state.cart.cart);
   const cartService = new CartService();
-  const { setIsOpen } = useContext(ModalContext);
-  const isLogged = useSelector((state: StateProps) => state.auth.isLogged);
+  const user = useSelector((state: StateProps) => state.auth.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -33,18 +32,18 @@ export const Header = () => {
   }, []);
 
   const handleAction = () => {
-    if (isLogged) {
+    if (user) {
       dispatch(logout());
     } else {
-      setIsOpen(true);
+      dispatch(toggleModal(true));
     }
   };
 
   const handleNavigate = () => {
-    if (isLogged) {
+    if (user) {
       navigate('/cart');
     } else {
-      setIsOpen(true);
+      dispatch(toggleModal(true));
     }
   };
 
@@ -95,7 +94,7 @@ export const Header = () => {
               </li>
               <li className="action-item">
                 <Link
-                  to={isLogged ? '/cart' : '#'}
+                  to={user ? '/cart' : '#'}
                   className="header-action-link"
                   onClick={handleNavigate}
                 >
@@ -104,7 +103,7 @@ export const Header = () => {
                     src={require('../../assets/icons/ic-cart.svg').default}
                     alt="Cart Icon"
                   />
-                  {cartService.getQuantity(cart) > 0 && isLogged && (
+                  {cartService.getQuantity(cart) > 0 && user && (
                     <span className="cart-item-count">
                       {cartService.getQuantity(cart)}
                     </span>
@@ -113,7 +112,7 @@ export const Header = () => {
               </li>
               <li className="action-item">
                 <button className="header-action-link" onClick={handleAction}>
-                  {isLogged ? 'Logout' : 'Login'}
+                  {user ? 'Logout' : 'Login'}
                 </button>
               </li>
             </ul>

@@ -11,17 +11,17 @@ export const Cart = () => {
   const cartService = new CartService();
   const cart = useSelector((state: StateProps) => state.cart.cart);
   const navigate = useNavigate();
-  const isLogged = useSelector((state: StateProps) => state.auth.isLogged);
+  const user = useSelector((state: StateProps) => state.auth.user);
 
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
 
   useEffect(() => {
-    if (!isLogged) {
+    if (!user) {
       navigate('/');
     }
-  }, [isLogged, navigate]);
+  }, [user, navigate]);
 
   return (
     <main>

@@ -6,6 +6,7 @@ export enum Status {
 export enum StorageKeys {
   CART = 'cart',
   PRODUCTS = 'products',
+  USER = 'user',
 }
 
 export enum ToastTypes {

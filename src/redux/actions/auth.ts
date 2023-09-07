@@ -36,7 +36,7 @@ export const loginFailed = (error: any) => {
   return { type: LOGIN_FAILED, payload: error };
 };
 
-export const clearError = () => {
+export const clearMessage = () => {
   return { type: CLEAR_ERROR };
 };
 

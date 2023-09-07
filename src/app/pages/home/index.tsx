@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Footer, Newsletter } from '../../../shared/components';
@@ -13,22 +13,24 @@ import { fetchProductsRequest } from '../../../redux/actions/product';
 import Modal from '../../../shared/components/Modal';
 import Login from '../../../shared/components/Login';
 import { StateProps } from '../../../redux/store';
-import { ModalContext } from '../../../context';
 import { ToastTypes } from '../../../shared/constants';
-import { clearError } from '../../../redux/actions/auth';
+import { clearMessage } from '../../../redux/actions/auth';
 import Toast from '../../../shared/components/Toast';
+import { toggleModal } from '../../../redux/actions/modal';
 
 export const Home = () => {
   const dispatch = useDispatch();
   const error = useSelector((state: StateProps) => state.auth.error);
-  const isLogged = useSelector((state: StateProps) => state.auth.isLogged);
+  const successMessage = useSelector(
+    (state: StateProps) => state.auth.successMessage
+  );
+  const isOpen = useSelector((state: StateProps) => state.modal.isOpen);
   const [showToast, setShowToast] = useState(false);
   const [toast, setToast] = useState({
     title: '',
     desc: '',
     type: ToastTypes.SUCCESS,
   });
-  const { isOpen, setIsOpen } = useContext(ModalContext);
 
   const showCustomToast = (title: string, desc: string, type: ToastTypes) => {
     setShowToast(true);
@@ -42,17 +44,13 @@ export const Home = () => {
 
   useEffect(() => {
     if (error) {
-      showCustomToast(
-        'Error',
-        'Login failed. Please check your email and password.',
-        ToastTypes.FAILED
-      );
-      dispatch(clearError());
-    } else if (isLogged) {
-      showCustomToast('Success', 'Login successful!', ToastTypes.SUCCESS);
-      setIsOpen(false);
+      showCustomToast('Error', error, ToastTypes.FAILED);
+    } else if (successMessage) {
+      showCustomToast('Success', successMessage, ToastTypes.SUCCESS);
+      dispatch(toggleModal(false));
     }
-  }, [error, isLogged, dispatch, setIsOpen]);
+    dispatch(clearMessage());
+  }, [error, successMessage, dispatch]);
 
   return (
     <div className="home-wrap">

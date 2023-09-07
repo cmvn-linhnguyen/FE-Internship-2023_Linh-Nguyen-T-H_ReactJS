@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {
   BrowserRouter as Router,
@@ -11,33 +11,29 @@ import { Header } from './shared/components';
 import { Cart, Home } from './app/pages';
 
 import { StateProps } from './redux/store';
-import { ModalContext } from './context';
 import { saveDataToLocalStorage } from './shared/utils';
 import { StorageKeys } from './shared/constants';
 
 const App = () => {
   const cart = useSelector((state: StateProps) => state.cart.cart);
-  const isLogged = useSelector((state: StateProps) => state.auth.isLogged);
-  const [isOpen, setIsOpen] = useState(false);
+  const user = useSelector((state: StateProps) => state.auth.user);
 
   useEffect(() => {
     saveDataToLocalStorage(StorageKeys.CART, cart);
   }, [cart]);
 
   return (
-    <ModalContext.Provider value={{ isOpen, setIsOpen }}>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {isLogged ? (
-            <Route path="/cart" element={<Cart />} />
-          ) : (
-            <Route path="/cart" element={<Navigate to="/" replace />} />
-          )}
-        </Routes>
-      </Router>
-    </ModalContext.Provider>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        {user ? (
+          <Route path="/cart" element={<Cart />} />
+        ) : (
+          <Route path="/cart" element={<Navigate to="/" replace />} />
+        )}
+      </Routes>
+    </Router>
   );
 };
 

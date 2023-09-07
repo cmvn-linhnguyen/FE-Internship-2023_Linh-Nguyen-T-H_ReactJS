@@ -7,16 +7,14 @@ import {
 import { calcProductPrice } from '../../../../../shared/utils';
 import { addToCart } from '../../../../../redux/actions/cart';
 import { StateProps } from '../../../../../redux/store';
-import { useContext } from 'react';
-import { ModalContext } from '../../../../../context';
+import { toggleModal } from '../../../../../redux/actions/modal';
 
 export const Product = ({ product }: { product: ProductProps }) => {
   const dispatch = useDispatch();
-  const isLogged = useSelector((state: StateProps) => state.auth.isLogged);
-  const { setIsOpen } = useContext(ModalContext);
+  const user = useSelector((state: StateProps) => state.auth.user);
 
   const handleAddToCart = (product: ProductProps) => {
-    if (isLogged) {
+    if (!user) {
       const cartItem: CartItemProps = {
         id: product.id,
         name: product.name,
@@ -28,7 +26,7 @@ export const Product = ({ product }: { product: ProductProps }) => {
 
       dispatch(addToCart(cartItem));
     } else {
-      setIsOpen(true);
+      dispatch(toggleModal(true));
     }
   };
 
