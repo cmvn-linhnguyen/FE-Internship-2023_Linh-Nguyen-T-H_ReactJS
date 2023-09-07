@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 
 import { ProductList } from './products/ProductList';
+
 import { StateProps } from '../../../../redux/store';
 
 export const ProductToday = () => {

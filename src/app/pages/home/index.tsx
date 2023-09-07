@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Footer, Newsletter } from '../../../shared/components';
+import { Footer, Login, Modal, Newsletter } from '../../../shared/components';
 import {
   Advertisement,
   Banner,
@@ -9,49 +10,28 @@ import {
   Benefits,
   ProductToday,
 } from './components';
+
 import { fetchProductsRequest } from '../../../redux/actions/product';
-import Modal from '../../../shared/components/Modal';
-import Login from '../../../shared/components/Login';
 import { StateProps } from '../../../redux/store';
-import { ToastTypes } from '../../../shared/constants';
-import { clearMessage } from '../../../redux/actions/auth';
-import Toast from '../../../shared/components/Toast';
 import { toggleModal } from '../../../redux/actions/modal';
+import { getDataFromLocalStorage } from '../../../shared/utils';
+import { StorageKeys } from '../../../shared/constants';
 
 export const Home = () => {
   const dispatch = useDispatch();
-  const error = useSelector((state: StateProps) => state.auth.error);
-  const successMessage = useSelector(
-    (state: StateProps) => state.auth.successMessage
-  );
   const isOpen = useSelector((state: StateProps) => state.modal.isOpen);
-  const [showToast, setShowToast] = useState(false);
-  const [toast, setToast] = useState({
-    title: '',
-    desc: '',
-    type: ToastTypes.SUCCESS,
-  });
 
-  const showCustomToast = (title: string, desc: string, type: ToastTypes) => {
-    setShowToast(true);
-    setToast({ title, desc, type });
-  };
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/cart') dispatch(toggleModal(true));
+  }, [location.pathname, dispatch]);
 
   useEffect(() => {
     window.scroll(0, 0);
-    dispatch(fetchProductsRequest() as any);
+    if (!getDataFromLocalStorage(StorageKeys.PRODUCTS).length)
+      dispatch(fetchProductsRequest() as any);
   }, [dispatch]);
-
-  useEffect(() => {
-    if (error) {
-      showCustomToast('Error', error, ToastTypes.FAILED);
-      dispatch(clearMessage());
-    } else if (successMessage) {
-      showCustomToast('Success', successMessage, ToastTypes.SUCCESS);
-      dispatch(toggleModal(false));
-      dispatch(clearMessage());
-    }
-  }, [error, successMessage, dispatch]);
 
   return (
     <div className="home-wrap">
@@ -60,15 +40,6 @@ export const Home = () => {
           <Login />
         </Modal>
       )}
-      {showToast && (
-        <Toast
-          type={toast.type}
-          title={toast.title}
-          desc={toast.desc}
-          onClose={() => setShowToast(false)}
-        />
-      )}
-
       <Banner />
       <Advertisement />
       <Recommendation />

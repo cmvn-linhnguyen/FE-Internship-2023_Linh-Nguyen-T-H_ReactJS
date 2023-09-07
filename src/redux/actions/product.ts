@@ -1,4 +1,5 @@
 import { ProductProps } from '../../shared/models/interface';
+import { fetchProducts } from '../../shared/services/products-service';
 import {
   FETCH_PRODUCTS_FAILURE,
   FETCH_PRODUCTS_REQUEST,
@@ -7,18 +8,9 @@ import {
 
 export const fetchProductsRequest = () => async (dispatch: any) => {
   dispatch({ type: FETCH_PRODUCTS_REQUEST });
-
-  setTimeout(async () => {
-    try {
-      const response = await fetch(
-        'products.json' + ['', '*', ''][Math.floor(Math.random() * 3)]
-      );
-      const data = await response.json();
-      dispatch(fetchProductsSuccess(data));
-    } catch (error) {
-      dispatch(fetchProductsFailure(error));
-    }
-  }, 2000);
+  fetchProducts()
+    .then((data) => dispatch(fetchProductsSuccess(data)))
+    .catch((error: any) => dispatch(fetchProductsFailure(error)));
 };
 
 export const fetchProductsSuccess = (products: ProductProps[]) => {

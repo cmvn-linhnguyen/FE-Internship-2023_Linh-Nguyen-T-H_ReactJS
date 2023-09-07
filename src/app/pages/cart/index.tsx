@@ -5,27 +5,25 @@ import { CartEmpty, CartSummary, CartTable } from './components';
 
 import { CartService } from '../../../shared/services/cart-service';
 import { StateProps } from '../../../redux/store';
-import { useNavigate } from 'react-router-dom';
+import { Modal } from '../../../shared/components';
 
 export const Cart = () => {
   const cartService = new CartService();
   const cart = useSelector((state: StateProps) => state.cart.cart);
-  const navigate = useNavigate();
-  const user = useSelector((state: StateProps) => state.auth.user);
+  const isOpen = useSelector((state: StateProps) => state.modal.isOpen);
 
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/');
-    }
-  }, [user, navigate]);
-
   return (
     <main>
       <section className="section section-cart">
+        {isOpen && (
+          <Modal>
+            <p>aaaaaa</p>
+          </Modal>
+        )}
         <h3 className="cart-header">Shopping Cart</h3>
         <div className="container">
           <div className="row section-cart-content">

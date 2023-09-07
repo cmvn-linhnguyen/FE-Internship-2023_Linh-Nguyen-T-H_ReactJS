@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 
 import { ProductList } from './products/ProductList';
+
 import { StateProps } from '../../../../redux/store';
-import { error } from 'console';
 
 export const Recommendation = () => {
   const products = useSelector((state: StateProps) => state.products.products);

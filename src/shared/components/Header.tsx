@@ -8,13 +8,16 @@ import { logout } from '../../redux/actions/auth';
 import { toggleModal } from '../../redux/actions/modal';
 
 export const Header = () => {
-  const cart = useSelector((state: StateProps) => state.cart.cart);
   const cartService = new CartService();
-  const user = useSelector((state: StateProps) => state.auth.user);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
+  const cart = useSelector((state: StateProps) => state.cart.cart);
+  const user = useSelector((state: StateProps) => state.auth.user);
+
+  const navigate = useNavigate();
   const location = useLocation();
+
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -34,6 +37,7 @@ export const Header = () => {
   const handleAction = () => {
     if (user) {
       dispatch(logout());
+      if (location.pathname !== '/') navigate('/');
     } else {
       dispatch(toggleModal(true));
     }
@@ -94,7 +98,7 @@ export const Header = () => {
               </li>
               <li className="action-item">
                 <Link
-                  to={user ? '/cart' : '#'}
+                  to={'/cart'}
                   className="header-action-link"
                   onClick={handleNavigate}
                 >

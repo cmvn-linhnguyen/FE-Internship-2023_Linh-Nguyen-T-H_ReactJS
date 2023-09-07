@@ -13,3 +13,6 @@ export enum ToastTypes {
   SUCCESS = 'success',
   FAILED = 'failed',
 }
+
+export const RegEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+export const RegPassword = /^.{6,}$/;

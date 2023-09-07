@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import useForm from '../../custom-hook/useForm';
 import { loginRequest } from '../../redux/actions/auth';
 import { StateProps } from '../../redux/store';
-import useForm from '../../custom-hook/useForm';
 
-const Login = () => {
+export const Login = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector((state: StateProps) => state.auth.isLoading);
 
@@ -45,5 +45,3 @@ const Login = () => {
     </div>
   );
 };
-
-export default Login;

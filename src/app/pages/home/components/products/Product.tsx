@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Status } from '../../../../../shared/constants';
+
 import {
   CartItemProps,
   ProductProps,
 } from '../../../../../shared/models/interface';
+import { Status } from '../../../../../shared/constants';
 import { calcProductPrice } from '../../../../../shared/utils';
+
 import { addToCart } from '../../../../../redux/actions/cart';
 import { StateProps } from '../../../../../redux/store';
 import { toggleModal } from '../../../../../redux/actions/modal';
@@ -14,7 +16,7 @@ export const Product = ({ product }: { product: ProductProps }) => {
   const user = useSelector((state: StateProps) => state.auth.user);
 
   const handleAddToCart = (product: ProductProps) => {
-    if (!user) {
+    if (user) {
       const cartItem: CartItemProps = {
         id: product.id,
         name: product.name,

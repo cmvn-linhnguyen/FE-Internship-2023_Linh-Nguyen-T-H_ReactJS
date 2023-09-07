@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { RegEmail, RegPassword } from '../shared/constants';
 
 interface FormValues {
   email: string;
@@ -40,11 +41,7 @@ const useForm = (callback: () => void) => {
 
     switch (name) {
       case 'email':
-        if (
-          !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-            value
-          )
-        ) {
+        if (!RegEmail.test(value)) {
           setErrors({
             ...errors,
             email: 'Enter a valid email address',
@@ -57,7 +54,7 @@ const useForm = (callback: () => void) => {
         break;
 
       case 'password':
-        if (!/^.{6,}$/.test(value)) {
+        if (!RegPassword.test(value)) {
           setErrors({
             ...errors,
             password: 'Password should contain at least 6 characters',

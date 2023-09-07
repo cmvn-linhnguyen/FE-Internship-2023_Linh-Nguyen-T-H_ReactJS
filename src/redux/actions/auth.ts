@@ -1,4 +1,5 @@
 import { UserProps } from '../../shared/models/interface';
+import { login } from '../../shared/services/auth-service';
 import {
   CLEAR_ERROR,
   LOGIN_FAILED,
@@ -10,22 +11,11 @@ import {
 export const loginRequest = (user: UserProps) => async (dispatch: any) => {
   dispatch({ type: LOGIN_REQUEST });
 
-  setTimeout(async () => {
-    try {
-      const response = await fetch('accounts.json');
-      const data: UserProps[] = await response.json();
-      const userItem = data.find(
-        (item) => item.email === user.email && item.password === user.password
-      );
-      if (userItem) {
-        dispatch(loginSuccess(user));
-      } else {
-        dispatch(loginFailed('Email or password is incorrect.'));
-      }
-    } catch (error) {
-      dispatch(loginFailed('Something went wrong.'));
-    }
-  }, 2000);
+  login(user)
+    .then((data) => dispatch(loginSuccess(data)))
+    .catch((error) => {
+      dispatch(loginFailed(error));
+    });
 };
 
 export const loginSuccess = (user: UserProps) => {

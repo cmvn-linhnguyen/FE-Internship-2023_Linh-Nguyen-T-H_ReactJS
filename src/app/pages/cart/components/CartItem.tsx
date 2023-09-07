@@ -6,10 +6,12 @@ import { calcCartPrice, calcProductPrice } from '../../../../shared/utils';
 import { removeFromCart, updateCartItem } from '../../../../redux/actions/cart';
 
 export const CartItem = ({ cartItem }: { cartItem: CartItemProps }) => {
+  const dispatch = useDispatch();
+
   const [isEditable, setIsEditable] = useState(false);
   const [isError, setIsError] = useState(false);
+
   const inputRef = useRef<HTMLInputElement>(null);
-  const dispatch = useDispatch();
 
   const handleDelete = (id: number) => {
     dispatch(removeFromCart(id));

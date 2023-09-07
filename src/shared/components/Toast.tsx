@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 
-import { ToastTypes } from '../constants';
 import CloseIcon from '../../assets/icons/ic-close.svg';
+
+import { ToastTypes } from '../constants';
 
 interface ToastProps {
   type: ToastTypes;
@@ -10,7 +11,7 @@ interface ToastProps {
   onClose: () => void;
 }
 
-const Toast = ({ type, title, desc, onClose }: ToastProps) => {
+export const Toast = ({ type, title, desc, onClose }: ToastProps) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
@@ -33,5 +34,3 @@ const Toast = ({ type, title, desc, onClose }: ToastProps) => {
     </div>
   );
 };
-
-export default Toast;
