@@ -45,11 +45,12 @@ export const Home = () => {
   useEffect(() => {
     if (error) {
       showCustomToast('Error', error, ToastTypes.FAILED);
+      dispatch(clearMessage());
     } else if (successMessage) {
       showCustomToast('Success', successMessage, ToastTypes.SUCCESS);
       dispatch(toggleModal(false));
+      dispatch(clearMessage());
     }
-    dispatch(clearMessage());
   }, [error, successMessage, dispatch]);
 
   return (
